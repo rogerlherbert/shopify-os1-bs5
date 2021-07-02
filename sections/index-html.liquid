@@ -1,0 +1,22 @@
+{{ section.settings.html_area }}
+
+{% schema %}
+{
+  "name": "Custom HTML",
+  "class": "custom-html",
+  "settings": [
+    {
+     "type": "html",
+     "id": "html_area",
+     "label": "Custom HTML",
+     "default": "<div><p>Some HTML content</p></div>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom HTML",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row g-0 align-items-center">
+    {% if collection.image %}
+    <div class="col-sm">
+      <picture>
+        <source srcset="{{ collection.image | img_url: '768x', scale: 2 }}" media="(min-width: 576px)">
+        <img class="w-100" src="{{ collection.image | img_url: '576x', scale: 2 }}" alt="{{ collection.title | escape }}">
+      </picture>
+    </div>
+    {% endif %}
+    <div class="col-sm py-3 text-center">
+      <h1>{{ collection.title }}</h1>
+      <div>{{ collection.description }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <button type="button" class="btn btn-link" data-bs-toggle="offcanvas" data-bs-target="#filters-drawer"><i class="bi bi-filter"></i> Filters</button>
+
+{% paginate collection.products by 24 %}
+  {% render 'product-grid', products: collection.products %}
+  {% if paginate.pages > 1 %}
+    {% render 'pagination', paginate: paginate %}
+  {% endif %}
+{% endpaginate %}
+</div>
+
+{% render 'drawer-filters.liquid' %}

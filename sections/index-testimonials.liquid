@@ -1,0 +1,81 @@
+<h2 class="text-center mb-3">{{ section.settings.header }}</h2>
+
+<div class="container">
+  <div class="row">
+
+  {% for block in section.blocks %}
+
+  <div class="col-sm-3 mb-4 px-4 text-center">
+    <a class="d-block text-reset text-decoration-none" href="{{ block.settings.cta_url }}">
+      <img class="mb-3" style="max-width: 75%; max-height: 5rem;" src="{{ block.settings.image | img_url: "360x", scale: 2, crop: "center" }}">
+      <p><q>{{ block.settings.quote }}</q> <cite class="text-decoration-underline">{{ block.settings.publication }}</cite></p>
+    </a>
+  </div>
+
+  {% endfor %}
+
+  </div>
+</div>
+
+<div class="text-center mt-3">
+  <a class="btn btn-outline-secondary" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "class": "testimonials",
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Publication Logo"
+        },
+        {
+          "id": "publication",
+          "type": "text",
+          "label": "Publication Name"
+        },
+        {
+          "id": "quote",
+          "type": "text",
+          "label": "Quote"
+        },
+        {
+          "id": "cta_url",
+          "type": "url",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "id": "header",
+      "label": "Header",
+      "type": "text",
+      "default": "Testimonials"
+    },
+    {
+      "id": "cta_label",
+      "type": "text",
+      "label": "Button Label"
+    },
+    {
+      "id": "cta_url",
+      "type": "url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "category": "Repeatable Blocks"
+    }
+  ]
+}
+{% endschema %}

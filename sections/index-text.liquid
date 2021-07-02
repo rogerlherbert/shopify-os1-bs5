@@ -1,0 +1,39 @@
+<div class="container {{ section.settings.text_align }}">
+  {% if section.settings.headline != blank %}<h2>{{ section.settings.headline }}</h2>{% endif %}
+  {{ section.settings.text_area }}
+</div>
+
+{% schema %}
+{
+  "name": "Rich Text",
+  "class": "rich-text",
+  "settings": [
+    {
+     "type": "text",
+     "id": "headline",
+     "label": "Headline"
+    },
+    {
+     "type": "richtext",
+     "id": "text_area",
+     "label": "Rich Text"
+    },
+    {
+     "type": "select",
+     "id": "text_align",
+     "options": [
+        { "value": "text-start", "label": "Left"},
+        { "value": "text-center", "label": "Center"},
+        { "value": "text-end", "label": "Right"}
+     ],
+     "label": "Text alignment"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich Text",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}

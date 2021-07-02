@@ -1,0 +1,6 @@
+
+<div class="list-group list-group-flush mb-3">
+  {% for link_lv1 in list.links %}
+  <a href="{{ link_lv1.url }}" class="list-group-item list-group-item-action">{{ link_lv1.title }}</a>
+  {% endfor %}
+</div>

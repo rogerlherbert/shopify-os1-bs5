@@ -1,0 +1,67 @@
+<!-- /templates/customers/order.liquid -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
+      {% render 'account-nav' %}
+
+      <div class="mb-3">
+        <h1>Order {{ order.name }}</h1>
+        <p><span class="badge bg-primary">{{ order.financial_status_label }}</span> <span class="badge bg-primary">{{ order.fulfillment_status_label }}</span></p>
+        <dl class="row row-cols-2 mb-0">
+          <dt class="col-4">Created</dt><dd class="col">{{ order.created_at | date: "%a, %b %d, %Y" }}</dt>
+          <dt class="col-4">Subtotal</dt><dd class="col">{{ order.subtotal_price | money }}</dd>
+          {% for tax_line in order.tax_lines %}
+            <dt class="col-4">Tax ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</dt><dd class="col">{{ tax_line.price | money }}</dd>
+          {% endfor %}
+          <dt class="col-4">Shipping</dt><dd class="col">{{ order.shipping_price | money }}</dd>
+          <dt class="col-4">Total</dt><dd class="col">{{ order.total_price | money }}</dd>
+        </dl>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+        <h4 class="card-title">Billing Address</h4>
+        {% render 'address', address: order.billing_address %}
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+        <h4 class="card-title">Shipping Address</h4>
+        {% render 'address', address: order.billing_address %}
+        </div>
+      </div>
+
+      <h2>Order Items</h2>
+      {% for line_item in order.line_items %}
+      <div class="card mb-3">
+        <div class="row g-0">
+
+          <div class="col-3">
+            <img class="w-100" src="{{ line_item.image | img_url }}" alt="{{ line_item.title | escape }}">
+          </div>
+
+          <div class="col">
+            <div class="card-body">
+              <h5 class="card-title">{{ line_item.title | link_to: line_item.product.url }}</h5>
+              <div class="card-text">
+                <dl class="row row-cols-2 mb-0">
+                {% unless line_item.product.has_only_default_variant %}
+                  {% for option in line_item.options_with_values %}
+                  <dt class="col-4">{{ option.name }}</dt><dd class="col">{{ option.value }}</dd>
+                  {% endfor %}
+                {% endunless %}
+                  <dt class="col-4">Qty</dt><dd class="col">{{ line_item.quantity }}</dd>
+                  <dt class="col-4">Price</dt><dd class="col">{{ line_item.final_line_price | money }}</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>

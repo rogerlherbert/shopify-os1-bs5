@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    {% for block in section.blocks %}
+    <div class="col-sm">
+      <blockquote class="instagram-media" data-instgrm-permalink="{{ block.settings.post_url }}?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="13" ></blockquote>
+    </div>
+    {% endfor %}
+
+    <script async src="//www.instagram.com/embed.js"></script>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Instagram Grid",
+  "class": "instagram-grid",
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Post",
+      "settings": [
+        {
+          "id": "post_url",
+          "type": "url",
+          "label": "Post URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Grid",
+      "category": "Repeatable Blocks"
+    }
+  ]
+}
+{% endschema %}

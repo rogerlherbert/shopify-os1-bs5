@@ -1,0 +1,75 @@
+<div class="text-center masthead-wrapper" id="masthead-{{ section.id }}">
+  <div class="d-flex flex-column justify-content-center align-items-center vh-100 px-5">
+    <h2 class="display-1">{{ section.settings.headline }}</h2>
+    <p>{{ section.settings.subline }}</p>
+    <a class="btn btn-primary btn-lg" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+  </div>
+</div>
+
+<style type="text/css">
+  #masthead-{{ section.id }} {
+    background-image: url('{{ section.settings.image_portrait | img_url: "414x736", scale: 3, crop: "center" }}');
+  }
+
+  @media screen and (min-width: 769px) {
+    #masthead-{{ section.id }} {
+      background-image: url('{{ section.settings.image_landscape | img_url: "1440x900", scale: 2, crop: "center" }}');
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Image Masthead",
+  "class": "image-masthead",
+  "settings": [
+    {
+      "id": "image_portrait",
+      "type": "image_picker",
+      "label": "Image (Portrait 9:16)"
+    },
+    {
+      "id": "image_landscape",
+      "type": "image_picker",
+      "label": "Image (Landscape 16:9)"
+    },
+    {
+      "id": "headline",
+      "type": "text",
+      "label": "Headline"
+    },
+    {
+      "id": "subline",
+      "type": "text",
+      "label": "Subline"
+    },
+    {
+      "id": "cta_label",
+      "type": "text",
+      "label": "Button Label"
+    },
+    {
+      "id": "cta_url",
+      "type": "url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Masthead",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .masthead-wrapper {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .masthead {
+    min-height: 177vw;
+  }
+{% endstylesheet %}

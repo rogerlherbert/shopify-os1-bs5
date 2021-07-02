@@ -1,0 +1,17 @@
+<div class="container">
+
+  <form action="/search" method="get" role="search">
+    <div class="input-group mb-3">
+      <input class="form-control form-control-lg" type="search" name="q" value="{{ search.terms | escape }}">
+      <button class="btn btn-primary" type="submit">search</button>
+    </div>
+  </form>
+
+  {% paginate search.results by 24 %}
+    {% render 'product-grid', products: search.results %}
+    {% if paginate.pages > 1 %}
+      {% render 'pagination', paginate: paginate %}
+    {% endif %}
+  {% endpaginate %}
+
+</div>

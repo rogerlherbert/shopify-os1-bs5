@@ -1,0 +1,5 @@
+<ul class="list-inline mb-3">
+  {% for link_lv1 in list.links %}
+  <li class="list-inline-item"><a href="{{ link_lv1.url }}">{{ link_lv1.title }}</a></li>
+  {% endfor %}
+</ul>

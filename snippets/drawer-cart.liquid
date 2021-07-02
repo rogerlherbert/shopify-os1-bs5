@@ -1,0 +1,48 @@
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cart-drawer" aria-labelledby="offcanvasLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasLabel">Cart</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="cart">
+      {% if cart.item_count > 0 %}
+      <div class="cart__items">
+        {% for item in cart.items %}
+          {% render 'drawer-cart-item.liquid' item: item %}
+        {% endfor %}
+      </div>
+
+      <div class="cart__summary">
+        <dl class="row">
+          <dt class="col-6">Subtotal{% if cart.taxes_included %} incl. VAT{% endif %}</dt>
+          <dd class="col-6 text-end">{{ cart.total_price | money }}</dd>
+
+          <dt class="col-6">Shipping</dt>
+          <dd class="col-6 text-end">calculated at checkout</dd>
+        </dl>
+      </div>
+
+      <div class="cart__cta mb-3">
+        <div class="d-grid gap-2">
+          <a href="/checkout" class="btn btn-primary btn-lg" role="button">Checkout</a>
+        </div>
+      </div>
+
+      <div class="cart__paymenttypes text-center">
+        {% for type in shop.enabled_payment_types %}
+          {{ type | payment_type_svg_tag }}
+        {% endfor %}
+      </div>
+
+      <div class="cart__crossell">
+        
+      </div>
+
+      {% else %}
+      <h2>cart</h2>
+      Cart is empty
+
+      {% endif %}
+    </div>
+  </div>
+</div>

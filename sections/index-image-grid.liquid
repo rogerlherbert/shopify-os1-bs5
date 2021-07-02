@@ -1,0 +1,65 @@
+<h2 class="text-center mb-3">{{ section.settings.title }}</h2>
+
+<div class="container">
+  <div class="row gx-0">
+    {% for block in section.blocks %}
+    <div class="col-sm mb-3">
+      <a href="{{ block.settings.post_url }}">
+        <img class="w-100" alt="{{ image.alt | escape }}" src="{{ block.settings.post_image | img_url: "360x360", scale: 2, crop: "center" }}">
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="text-center mt-3">
+  <a class="btn btn-outline-secondary" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+</div>
+
+{% schema %}
+{
+  "name": "Image Grid",
+  "class": "image-grid",
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Social Post",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "post_image",
+          "label": "Post Image"
+        },
+        {
+          "type": "url",
+          "id": "post_url",
+          "label": "Post URL"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "id": "cta_label",
+      "type": "text",
+      "label": "Button Label"
+    },
+    {
+      "id": "cta_url",
+      "type": "url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Grid",
+      "category": "Repeatable Blocks"
+    }
+  ]
+}
+{% endschema %}

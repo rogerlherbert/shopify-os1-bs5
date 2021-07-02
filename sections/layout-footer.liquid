@@ -1,0 +1,59 @@
+<hr class="my-5 invisible">
+
+<footer class="pb-5">
+  <div class="container px-4 px-sm-3">
+    <div class="row gx-5">
+      <div class="col-sm-2 mb-5">
+        <h5>{{ linklists.company-menu.title }}</h5>
+        {% render 'linklist-flush', list: linklists.company-menu %}
+      </div>
+
+      <div class="col-sm-2 mb-5">
+        <h5>{{ linklists.support-menu.title }}</h5>
+        {% render 'linklist-flush', list: linklists.support-menu %}
+      </div>
+
+      <div class="col-sm mb-5">
+        <h5>Subscribe</h5>
+        <p>Join our mailing list to get 10% off your first order.</p>
+        <form>
+          <div class="input-group mb-3">
+            <input class="form-control" type="email" name="email" placeholder="Your email address" required="required">
+            <button class="btn btn-primary" type="submit">Sign up</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-sm mb-5">
+        <h5>Follow Us</h5>
+        <p>Keep in touch via social media for more offers and inspiration to #keepyourhandsfree</p>
+        {% render 'linklist-inline', list: linklists.social-menu %}
+      </div>
+
+      <div class="col-sm-2">
+        <h5>Store</h5>
+        <div class="mb-3">
+        {% for link_lv1 in linklists.store-menu.links %}
+        <a class="btn btn-outline-secondary flex-fill" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
+        {% endfor %}
+        </div>
+
+        <h5>Currency</h5>
+        {% render 'locale-currency-selector' %}
+
+        <h5>Language</h5>
+        {% render 'locale-language-selector' %}
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="my-5 invisible">
+
+  <p class="text-center px-4">
+    &copy; {{ "now" | date: "%Y" }} Company name. All rights reserved.
+    {% for link_lv1 in linklists.footer.links %}
+    <a href="{{ link_lv1.url }}" class="text-nowrap">{{ link_lv1.title }}</a>{% unless forloop.last %}, {% else %}.{% endunless%}
+    {% endfor %}
+  </p>
+</footer>

@@ -1,0 +1,74 @@
+<h2 class="text-center mb-3">{{ section.settings.header }}</h2>
+
+<div class="container">
+<div class="row">
+
+{% for block in section.blocks %}
+<div class="col-sm mb-3" {{ block.shopify_attributes }}>
+  <div class="card h-100">
+    <img class="w-100" src="{{ block.settings.image | img_url: "414x414", scale: 2, crop: "center" }}" class="card-img-top" alt="{{ block.settings.image.alt }}">
+    <div class="card-body">
+      <h5 class="card-title">{{ block.settings.headline }}</h5>
+      <p class="card-text">{{ block.settings.description }}</p>
+      {% if block.settings.cta_url != blank %}<a href="{{ block.settings.cta_url }}" class="btn btn-primary">{{ block.settings.cta_label }}</a>{% endif %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+</div>
+</div>
+{% schema %}
+{
+  "name": "Card Grid",
+  "class": "card-grid",
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "id": "headline",
+          "type": "text",
+          "label": "Headline"
+        },
+        {
+          "id": "description",
+          "type": "text",
+          "label": "Description"
+        },
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        },
+        {
+          "id": "cta_label",
+          "type": "text",
+          "label": "Button Label",
+          "default": "Learn more"
+        },
+        {
+          "id": "cta_url",
+          "type": "url",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "id": "header",
+      "type": "text",
+      "label": "Header",
+      "default": "Cards"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card Grid",
+      "category": "Repeatable Blocks"
+    }
+  ]
+}
+{% endschema %}

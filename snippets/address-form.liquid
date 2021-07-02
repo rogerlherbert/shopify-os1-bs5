@@ -1,0 +1,64 @@
+
+<div class="mb-3">
+  <label for="first_name" class="form-label">First Name</label>
+  <input type="text" class="form-control" value="{{ address.first_name }}" name="address[first_name]" size="30" />
+</div>
+
+<div class="mb-3">
+  <label for="last_name" class="form-label">Last Name</label>
+  <input type="text" class="form-control" value="{{ address.last_name }}" name="address[last_name]" size="30" required="required" />
+</div>
+
+<div class="mb-3">
+  <label for="company" class="form-label">Company</label>
+  <input type="text" class="form-control" value="{{ address.company }}" name="address[company]" />
+</div>
+
+<div class="mb-3">
+  <label for="address1" class="form-label">Address 1</label>
+  <input type="text" class="form-control" value="{{ address.address1 }}" name="address[address1]" required="required" />
+</div>
+
+<div class="mb-3">
+  <label for="address2" class="form-label">Address 2</label>
+  <input type="text" class="form-control" value="{{ address.address2 }}" name="address[address2]" />
+</div>
+
+<div class="mb-3">
+  <label for="city" class="form-label">City</label>
+  <input type="text" class="form-control" value="{{ address.city }}" name="address[city]" required="required" />
+</div>
+
+<div class="mb-3">
+  <!-- See docs for @shopify/theme-addresses to support Country and Province -->
+  <label for="country" class="form-label">Country</label>
+  <select class="form-select" name="address[country]" /></select>
+</div>
+
+<div class="mb-3">
+  <label for="province" class="form-label">Province</label>
+  <select class="form-select" name="address[province]" /></select>
+</div>
+
+<div class="mb-3">
+  <label for="zip" class="form-label">Zip/Post Code</label>
+  <input type="text" class="form-control" value="{{ address.zip }}" name="address[zip]" />
+</div>
+
+<div class="mb-3">
+  <label for="phone" class="form-label">Phone Number</label>
+  <input type="tel" class="form-control" value="{{ address.phone }}" name="address[phone]" />
+</div>
+
+<div class="mb-3">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="{{ address.default }}" name="address[default]" id="flexCheckDefault">
+    <label class="form-check-label" for="flexCheckDefault">
+      Save as default address
+    </label>
+  </div>
+</div>
+
+<div class="d-grid gap-2">
+  <button class="btn btn-primary btn-lg" type="submit">Create Address</button>
+</div>

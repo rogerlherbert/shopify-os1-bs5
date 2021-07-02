@@ -1,0 +1,14 @@
+{% form 'localization' %}
+<div class="input-group mb-3">
+  <span class="input-group-text"><i class="bi bi-currency-exchange"></i></span>
+  <select name="country_code" class="form-select" aria-label="Country select">
+    {% for country in localization.available_countries %}
+      <option value="{{ country.iso_code }}"
+        {%- if country == localization.country %} selected="selected"{% endif %}
+      >
+        {{ country.name }} ({{ country.iso_code }}) - {{ country.currency.symbol }}
+      </option>
+    {% endfor %}
+  </select>
+</div>
+{% endform %}

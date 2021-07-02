@@ -1,0 +1,61 @@
+<!-- /templates/customers/login.liquid -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
+      <h2>Login</h2>
+
+      {% form 'customer_login' %}
+
+      {{ form.errors | default_errors }}
+
+      <div class="mb-3">
+        <label for="customer_email" class="form-label">Email Address</label>
+        <input type="email" class="form-control form-control-lg" name="customer[email]" />
+      </div>
+
+      <div class="mb-3">
+        <label for="customer_password" class="form-label">Password</label>
+        <input type="password" class="form-control form-control-lg" name="customer[password]" />
+      </div>
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary btn-lg" type="submit">Sign In</button>
+        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot your password?</button>
+        <a class="btn btn-link" href="{{ routes.account_register_url }}">Create new account</a>
+      </div>
+
+      {% endform %}
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+              {% form 'recover_customer_password' %}
+
+              {{ form.errors | default_errors }}
+
+              <div class="mb-3">
+                <label for="customer_email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" name="email" />
+              </div>
+
+              <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Submit" />
+              </div>
+
+              {% endform %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<ul>
+  {% for link_lv1 in list.links %}
+  <li>
+    <a href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
+    {% if link_lv1.links.size > 0 %}
+    <ul>
+    {% for link_lv2 in link_lv1.links %}
+      <li>
+        <a href="{{ link_lv2.url }}">{{ link_lv2.title }}</a>          
+        {% if link_lv2.links.size > 0 %}
+        <ul>
+        {% for link_lv3 in link_lv2.links %}
+          <li>
+            <a href="{{ link_lv3.url }}">{{ link_lv3.title }}</a>
+          </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

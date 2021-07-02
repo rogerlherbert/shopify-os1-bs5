@@ -1,0 +1,20 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="nav-drawer" aria-labelledby="offcanvasLabel">
+
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <form action="/search" method="get" role="search">
+      <div class="input-group mb-3">
+        <input class="form-control form-control-lg" type="search" name="q" value="{{ search.terms | escape }}" required="required">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+    </form>
+
+    {% render 'linklist-flush', list: linklists.main-menu %}
+
+    {% render 'linklist-flush', list: linklists.secondary-menu %}
+
+  </div>
+</div>

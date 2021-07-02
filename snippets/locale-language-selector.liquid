@@ -1,0 +1,13 @@
+{% form 'localization' %}
+<div class="input-group mb-3">
+  <select name="language_code" class="form-select" aria-label="Language select">
+    {% for language in localization.available_languages %}
+      <option value="{{ language.iso_code }}"
+        {%- if language == localization.language %} selected="selected"{% endif %}
+      >
+        {{ language.endonym_name }}
+      </option>
+    {% endfor %}
+  </select>
+</div>
+{% endform %}

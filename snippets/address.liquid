@@ -1,0 +1,11 @@
+<address class="mb-0">
+  {% if address.name != empty %}{{ address.name }}<br>{% endif %}
+  {% if address.company != empty %}{{ address.company }}<br>{% endif %}
+  {% if address.address1 != empty %}{{ address.address1 }}<br>{% endif %}
+  {% if address.address2 != empty %}{{ address.address2 }}<br>{% endif %}
+  {% if address.city != empty %}{{ address.city }} {% endif %}
+  {% if address.zip != empty %}{{ address.zip }}<br>{% endif %}
+  {% if address.province != empty %}{{ address.province }}, {% endif %}
+  {% if address.country != empty %}{{ address.country }}<br>{% endif %}
+  {% if address.phone != empty %}{{ address.phone }}<br>{% endif %}
+</address>

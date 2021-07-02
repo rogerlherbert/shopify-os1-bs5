@@ -1,0 +1,11 @@
+<div class="container">
+
+{% for collection in collections %}
+  {% unless collection.handle == 'frontpage' %}
+    {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+    {% render 'product-grid', products: collection.products limit:5 %}
+    <a href="{{ collection.url }}">More {{ collection_title }} &rsaquo;</a>
+  {% endunless %}
+{% endfor %}
+
+</div>
