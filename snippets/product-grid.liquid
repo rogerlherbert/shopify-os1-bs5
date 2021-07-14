@@ -1,8 +1,13 @@
+{% unless products.size > 0 %}
+  <div class="text-center my-5">
+    <p>Nothing found...</p>
+  </div>
+{% else %}
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
   {% for product in products %}
   <div class="col mb-3">
     <div class="card h-100">
-      <img class="card-img-top" src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+      <img class="card-img-top h-auto" loading="lazy" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
       <div class="card-body">
         <h5 class="card-title"><a class="stretched-link" href="{{ product.url | within: collection }}">{{ product.title }}</a></h5>
         <p class="card-text">{{ product.price | money }}
@@ -10,7 +15,6 @@
       </div>
     </div>
   </div>
-  {% else %}
-  <p>no matches</p>
   {% endfor %}
 </div>
+{% endunless %}

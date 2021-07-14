@@ -1,4 +1,4 @@
-<div class="text-center masthead-wrapper" id="masthead-{{ section.id }}">
+<div class="masthead__wrapper text-center" id="masthead-{{ section.id }}">
   <div class="d-flex flex-column justify-content-center align-items-center vh-100 px-5">
     <h2 class="display-1">{{ section.settings.headline }}</h2>
     <p>{{ section.settings.subline }}</p>
@@ -17,6 +17,13 @@
     }
   }
 </style>
+
+{% stylesheet %}
+  .masthead__wrapper {
+    background-size: cover;
+    background-position: center;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -62,14 +69,3 @@
   ]
 }
 {% endschema %}
-
-{% stylesheet %}
-  .masthead-wrapper {
-    background-size: cover;
-    background-position: center;
-  }
-
-  .masthead {
-    min-height: 177vw;
-  }
-{% endstylesheet %}

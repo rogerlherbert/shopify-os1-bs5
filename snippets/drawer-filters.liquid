@@ -4,6 +4,40 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-filters
+    <form class="filter-form mx-3 pb-5">
+      {%- for filter in collection.filters -%}
+        <div class="filter-group">
+          {% comment %} name of filter {% endcomment %}
+          <div class="filter-group-summary mb-3">
+            <h6>{{ filter.label }}</h6>
+          </div>
+
+          <div class="filter-group-display">
+            {% comment %} render list filters {% endcomment %}
+            {%- for filter_value in filter.values -%}
+            <div class="form-check mb-3">
+              <input type="checkbox"
+                class="form-check-input"
+                name="{{ filter_value.param_name }}"
+                value="{{ filter_value.value }}"
+                id="Filter-{{ filter.label }}-{{ forloop.index }}"
+                {% if filter_value.active -%}checked{%- endif %}
+                {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+              >
+              <label class="form-check-label d-flex justify-content-between" for="Filter-{{ filter.label }}-{{ forloop.index }}">{{ filter_value.label }} <span>{{ filter_value.count }}</span></label>
+            </div>
+            {%- endfor -%}
+          </div>
+          <hr>
+        </div>
+      {%- endfor -%}
+
+      <div class="active-filters position-fixed bottom-0 start-0 end-0 px-3 pt-3" style="background-color: white; padding-bottom: calc(1rem + env(safe-area-inset-bottom));">
+        <div class="d-flex">
+          <a class="active-filters__clear me-3 flex-fill btn btn-sm btn-outline-secondary" href="{{ collection.url }}">Clear all</a>
+          <button class="active-filters__apply flex-fill btn btn-sm btn-primary" type="submit">Apply</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>

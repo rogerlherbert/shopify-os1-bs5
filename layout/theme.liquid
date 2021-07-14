@@ -11,25 +11,24 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   {{ 'application.css' | asset_url | stylesheet_tag }}
-  {{ 'application.js' | asset_url | script_tag }}
+  <script src="{{ 'application.js' | asset_url }}" defer></script>
 </head>
-<body class="position-relative">
+<body class="{{ template.name | default: handle }} position-relative" id="{{ handle | default: template.name }}">
   <header class="position-sticky top-0" style="z-index: 1020; background-color: white;">
-    <div class="">
-      {% section 'layout-header' %}
-    </div>
+    {% section 'layout-header' %}
   </header>
 
   <main role="main">
+    {% section 'layout-announcement-bar' %}
     {{ content_for_layout }}
   </main>
 
   {% section 'layout-footer' %}
 
-  {% render 'drawer-nav.liquid' %}
+  {% render 'drawer-nav' %}
 
-  {% render 'drawer-cart.liquid' %}
+  {% render 'drawer-cart' %}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
 </body>
 </html>

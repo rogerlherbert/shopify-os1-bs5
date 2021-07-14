@@ -38,7 +38,7 @@
         <div class="row g-0">
 
           <div class="col-3">
-            <img class="w-100" src="{{ line_item.image | img_url }}" alt="{{ line_item.title | escape }}">
+            <img class="img-fluid" loading="lazy" width="{{ line_item.image.width }}" height="{{ line_item.image.height }}" src="{{ line_item.image | img_url }}" alt="{{ line_item.title | escape }}">
           </div>
 
           <div class="col">

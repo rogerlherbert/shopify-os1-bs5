@@ -1,11 +1,11 @@
 <h2 class="text-center mb-3">{{ section.settings.title }}</h2>
 
-<div class="container">
+<div class="">
   <div class="row gx-0">
     {% for block in section.blocks %}
     <div class="col-sm mb-3">
       <a href="{{ block.settings.post_url }}">
-        <img class="w-100" alt="{{ image.alt | escape }}" src="{{ block.settings.post_image | img_url: "360x360", scale: 2, crop: "center" }}">
+        <img class="img-fluid" loading="lazy" width="{{ block.settings.post_image.width }}" height="{{ block.settings.post_image.height }}" alt="{{ block.settings.post_image.alt | escape }}" src="{{ block.settings.post_image | img_url: '360x360', scale: 2, crop: 'center' }}">
       </a>
     </div>
     {% endfor %}

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-3 gx-0">
       <a href="{{ item.url | within: collections.all }}">
-        <img class="img-fluid" src="{{ item | img_url }}" alt="{{ item.title | escape }}">
+        <img class="img-fluid" loading="lazy" width="{{ item.image.width }}" height="{{ item.image.height }}" src="{{ item.image | img_url }}" alt="{{ item.title | escape }}">
       </a>
     </div>
     <div class="col pe-0">
@@ -19,7 +19,7 @@
             <button class="btn btn-outline-secondary" type="button" id="button-addon1">&plus;</button>
             <span class="input-group-text">{{ item.quantity }}</span>
             <button class="btn btn-outline-secondary" type="button" id="button-addon1">&minus;</button>
-          </div>          
+          </div>
         </div>
         <div class="col">
           <div class="text-end">

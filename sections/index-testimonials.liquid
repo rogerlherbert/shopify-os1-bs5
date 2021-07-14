@@ -5,10 +5,10 @@
 
   {% for block in section.blocks %}
 
-  <div class="col-sm-3 mb-4 px-4 text-center">
+  <div class="testimonial col-sm-3 mb-4 px-4 text-center">
     <a class="d-block text-reset text-decoration-none" href="{{ block.settings.cta_url }}">
-      <img class="mb-3" style="max-width: 75%; max-height: 5rem;" src="{{ block.settings.image | img_url: "360x", scale: 2, crop: "center" }}">
-      <p><q>{{ block.settings.quote }}</q> <cite class="text-decoration-underline">{{ block.settings.publication }}</cite></p>
+      <img class="testimonial__logo img-fluid mb-3" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" src="{{ block.settings.image | img_url: '360x', scale: 2, crop: 'center' }}">
+      <p class="testimonial__quote"><q>{{ block.settings.quote }}</q> <cite class="text-decoration-underline">{{ block.settings.publication }}</cite></p>
     </a>
   </div>
 

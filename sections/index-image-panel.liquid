@@ -1,0 +1,69 @@
+<div class="">
+  <div class="row gx-0">
+    <div class="col-sm">
+      <picture>
+        <source srcset="{{ section.settings.image | img_url: '768x', scale: 2 }}" media="(min-width: 576px)">
+        <img class="img-fluid" loading="lazy" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" src="{{ section.settings.image | img_url: '576x', scale: 2 }}" alt="{{ section.settings.image.alt | escape }}">
+      </picture>
+    </div>
+    <div class="col-sm{% if section.settings.image_align == 'right' %} order-sm-first{% endif %}">
+      <div class="col-10 col-sm-8 offset-1 offset-sm-2 h-100 py-5 text-center d-flex flex-column justify-content-center align-items-center">
+        <h2 class="display-4">{{ section.settings.headline }}</h2>
+        <p class="mb-3">{{ section.settings.subline }}</p>
+        <a class="btn btn-primary" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Image Panel",
+  "class": "image-panel",
+  "settings": [
+    {
+      "id": "image",
+      "type": "image_picker",
+      "label": "Image"
+    },
+    {
+      "type": "radio",
+      "id": "image_align",
+      "options": [
+         { "value": "left", "label": "Left"},
+         { "value": "right", "label": "Right"}
+      ],
+      "label": "Image alignment"
+    },
+    {
+      "id": "headline",
+      "type": "text",
+      "label": "Headline"
+    },
+    {
+      "id": "subline",
+      "type": "text",
+      "label": "Subline"
+    },
+    {
+      "id": "cta_label",
+      "type": "text",
+      "label": "CTA Label"
+    },
+    {
+      "id": "cta_url",
+      "type": "url",
+      "label": "CTA URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Panel",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}

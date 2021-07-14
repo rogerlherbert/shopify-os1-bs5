@@ -1,0 +1,17 @@
+
+<ul class="nav flex-column">
+  {% for link_lv1 in list.links %}
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
+      {% if link_lv1.links.size > 0 %}
+        <ul class="nav flex-column ms-3">
+          {% for link_lv2 in link_lv1.links %}
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ link_lv2.url }}">{{ link_lv2.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>

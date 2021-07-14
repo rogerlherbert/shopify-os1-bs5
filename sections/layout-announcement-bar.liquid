@@ -1,0 +1,48 @@
+{% if section.settings.show %}
+<div class="announcement_bar{% if template.name != 'index' %} mb-3{% endif %}" style="background-color: {{ section.settings.background_colour }};">
+  <div class="container">
+    <a href="{{ section.settings.cta_url }}" style="color: {{ section.settings.text_colour }};" class="announcement_bar__text d-block py-2 lh-sm text-center text-decoration-none"><small>{{ section.settings.text }} <span class="text-decoration-underline">{{ section.settings.cta_label }}</span></small></a>
+  </div>
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show",
+      "label": "Show Announcement Bar",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA text"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link"
+    },
+    {
+      "type": "color",
+      "id": "text_colour",
+      "label": "Text Colour",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "background_colour",
+      "label": "Background Colour",
+      "default": "#eeeeee"
+    }
+  ]
+}
+{% endschema %}

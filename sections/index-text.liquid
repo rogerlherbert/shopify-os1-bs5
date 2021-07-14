@@ -1,6 +1,8 @@
 <div class="container {{ section.settings.text_align }}">
+  <div class="col-10 col-sm-8 offset-1 offset-sm-2">
   {% if section.settings.headline != blank %}<h2>{{ section.settings.headline }}</h2>{% endif %}
   {{ section.settings.text_area }}
+  </div>
 </div>
 
 {% schema %}

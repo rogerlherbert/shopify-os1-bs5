@@ -1,29 +1,42 @@
-<div class="container">
+<div class="container mb-3">
   <div class="row g-0 align-items-center">
     {% if collection.image %}
     <div class="col-sm">
       <picture>
         <source srcset="{{ collection.image | img_url: '768x', scale: 2 }}" media="(min-width: 576px)">
-        <img class="w-100" src="{{ collection.image | img_url: '576x', scale: 2 }}" alt="{{ collection.title | escape }}">
+        <img class="img-fluid" loading="lazy" width="{{ collection.image.width }}" height="{{ collection.image.height }}" src="{{ collection.image | img_url: '576x', scale: 2 }}" alt="{{ collection.title | escape }}">
       </picture>
     </div>
     {% endif %}
     <div class="col-sm py-3 text-center">
+      <div class="col-10 offset-1">
       <h1>{{ collection.title }}</h1>
       <div>{{ collection.description }}</div>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="container">
-  <button type="button" class="btn btn-link" data-bs-toggle="offcanvas" data-bs-target="#filters-drawer"><i class="bi bi-filter"></i> Filters</button>
 
-{% paginate collection.products by 24 %}
+  {% paginate collection.products by 12 %}
   {% render 'product-grid', products: collection.products %}
   {% if paginate.pages > 1 %}
     {% render 'pagination', paginate: paginate %}
   {% endif %}
-{% endpaginate %}
+  {% endpaginate %}
+
 </div>
 
-{% render 'drawer-filters.liquid' %}
+<div class="filters_trigger position-fixed start-50 translate-middle-x">
+  <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#filters-drawer"><i class="bi bi-filter"></i> Filters</button>
+</div>
+
+<style>
+.filters_trigger {
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 1020;
+}
+</style>
+
+{% render 'drawer-filters' %}
