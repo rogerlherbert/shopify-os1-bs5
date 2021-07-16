@@ -23,7 +23,9 @@
 
       <div id="productImagesGrid" class="d-none d-sm-block">
       {% for image in product.images %}
+        {% unless image.attached_to_variant? %}
           <img src="{{ image.src | img_url: '768x', scale: 2 }}" class="img-fluid" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt | escape }}">
+        {% endunless %}
       {% endfor %}
       </div>
     </div>
@@ -35,6 +37,7 @@
         <p>{{ current_variant.price | money }}</p>
 
         <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+          {% unless product.has_only_default_variant %}
           <div class="mb-3">
             <select name="id" id="productSelect" class="form-select">
               {% for variant in product.variants %}
@@ -51,30 +54,46 @@
             </select>
           </div>
 
+          {% else %}
+          <input name="id" value="{{ current_variant.id }}" type="hidden">
+
+          {% endunless %}
+
           <div class="d-grid gap-2 mb-3">
-            <button type="submit" name="add" id="AddToCart" class="btn btn-primary btn-lg">Add to cart</button>
+            <button type="submit" name="add" id="AddToCart" class="btn btn-primary btn-lg"{% unless current_variant.available %} disabled="disabled"{% endunless %}>{% if current_variant.available %}Add to cart{% else %}Out Of Stock{% endif %}</button>
           </div>
         </form>
 
         <script src="{{ 'option_selection.js' | shopify_asset_url }}" defer></script>
         <script>
-          var selectCallback = function(variant, selector) {
-            // change ATC button state
+          let selectCallback = function(variant, selector) {
+            // update availability, price and image when variant changes
 
             if (typeof variant !== "undefined" && variant !== null) {
+
               if (variant.available) {
                 // variant available
                 enableSubmitButton();
 
                 // TODO - change price
-                // TODO - change variant image
+
+                if (variant.featured_image !== null) {
+                  scrollCarouselToVariantImage(variant.featured_image.position - 1);
+                  replaceFeaturedImageWithVariantImage(variant.featured_image);
+                }
+
               } else {
                 // defined, but not available
                 disableSubmitButton();
 
                 // TODO - change price
-                // TODO - change variant image
+
+                if (variant.featured_image !== null) {
+                  scrollCarouselToVariantImage(variant.featured_image.position - 1);
+                  replaceFeaturedImageWithVariantImage(variant.featured_image);
+                }
               }
+
             } else {
               // undefined or null
               disableSubmitButton();
@@ -82,27 +101,39 @@
             }
           }
 
-          function disableSubmitButton(){
+          function disableSubmitButton() {
             let btn = document.querySelector("#AddToCart");
             btn.setAttribute("disabled","");
             btn.textContent = "Out Of Stock";
           }
 
-          function enableSubmitButton(){
+          function enableSubmitButton() {
             let btn = document.querySelector("#AddToCart");
             btn.removeAttribute("disabled","");
             btn.textContent = "Add To Cart";
           }
 
-          // wait for option_selection.js deferred loading
-          document.addEventListener('DOMContentLoaded', function(event) {
-            new Shopify.OptionSelectors('productSelect', {
-              product: {{ product | json }},
-              onVariantSelected: selectCallback,
-              enableHistoryState: true
+          function scrollCarouselToVariantImage(position) {
+            let myCarousel = document.querySelector('#productImagesCarousel');
+            let carousel = new bootstrap.Carousel(myCarousel, {
+              interval: false,
+              ride: false
             });
 
-            // add BS5 layout classes to new form controls
+            carousel.to(position);
+          }
+
+          function replaceFeaturedImageWithVariantImage(variant_image) {
+            let featured_image_el = document.querySelector('#productImagesGrid img');
+            featured_image_el.src = variant_image.src;
+          }
+
+          function changePrice() {
+            // TODO
+          }
+
+          function addBootstrapClassesToForm() {
+            // add bootstrap layout classes to new form controls
             let inputGroups = document.querySelectorAll("#AddToCartForm .selector-wrapper");
 
             inputGroups.forEach(element => {
@@ -119,6 +150,17 @@
                 inputSelect.classList.add("form-select");
               }
             });
+          }
+
+          // wait for option_selection.js deferred loading
+          document.addEventListener('DOMContentLoaded', function(event) {
+            new Shopify.OptionSelectors('productSelect', {
+              product: {{ product | json }},
+              onVariantSelected: selectCallback,
+              enableHistoryState: true
+            });
+
+            addBootstrapClassesToForm();
           })
         </script>
 
