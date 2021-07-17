@@ -2,8 +2,8 @@
   <div class="row gx-0">
     <div class="col-sm">
       <picture>
-        <source srcset="{{ section.settings.image | img_url: '768x', scale: 2 }}" media="(min-width: 576px)">
-        <img class="img-fluid" loading="lazy" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" src="{{ section.settings.image | img_url: '576x', scale: 2 }}" alt="{{ section.settings.image.alt | escape }}">
+        <source srcset="{{ section.settings.image | img_url: '800x600', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
+        <img class="img-fluid" loading="lazy" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" src="{{ section.settings.image | img_url: '400x300', scale: 2, crop: 'center' }}" alt="{{ section.settings.image.alt | escape }}">
       </picture>
     </div>
     <div class="col-sm{% if section.settings.image_align == 'right' %} order-sm-first{% endif %}">
@@ -27,7 +27,7 @@
     {
       "id": "image",
       "type": "image_picker",
-      "label": "Image"
+      "label": "Image (Landscape 4:3)"
     },
     {
       "type": "radio",

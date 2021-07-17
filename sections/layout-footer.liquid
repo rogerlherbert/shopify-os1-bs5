@@ -14,24 +14,24 @@
       </div>
 
       <div class="col-sm mb-5">
-        <h5>Subscribe</h5>
-        <p>Join our mailing list to get 10% off your first order.</p>
+        <h5>{{ section.settings.mailinglist_headline }}</h5>
+        <p>{{ section.settings.mailinglist_description }}</p>
         <form>
           <div class="input-group mb-3">
             <input class="form-control" type="email" name="email" placeholder="Your email address" required="required">
-            <button class="btn btn-primary" type="submit">Sign up</button>
+            <button class="btn btn-primary" type="submit">{{ section.settings.mailinglist_cta }}</button>
           </div>
         </form>
       </div>
 
       <div class="col-sm mb-5">
-        <h5>Follow Us</h5>
-        <p>Keep in touch via social media for more offers and inspiration to #keepyourhandsfree</p>
+        <h5>{{ section.settings.social_headline }}</h5>
+        <p>{{ section.settings.social_description }}</p>
         {% render 'linklist-inline', list: linklists.social-menu %}
       </div>
 
       <div class="col-sm-2">
-        <h5>Store</h5>
+        <h5>{{ linklists.store-menu.title }}</h5>
         <div class="mb-3">
         {% for link_lv1 in linklists.store-menu.links %}
         <a class="btn btn-outline-secondary flex-fill" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
@@ -51,9 +51,53 @@
   <hr class="my-5 invisible">
 
   <p class="text-center px-4">
-    &copy; {{ "now" | date: "%Y" }} Company name. All rights reserved.
+    &copy; {{ "now" | date: "%Y" }} {{ section.settings.copyright }}
     {% for link_lv1 in linklists.footer.links %}
     <a href="{{ link_lv1.url }}" class="text-nowrap">{{ link_lv1.title }}</a>{% unless forloop.last %}, {% else %}.{% endunless%}
     {% endfor %}
   </p>
 </footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright notice",
+      "default": "Company name. All rights reserved."
+    },
+    {
+      "type": "text",
+      "id": "mailinglist_headline",
+      "label": "Mailing List Headline",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "mailinglist_description",
+      "label": "Mailing List Description",
+      "default": "Join our mailing list to get 10% off your first order."
+    },
+    {
+      "type": "text",
+      "id": "mailinglist_cta",
+      "label": "Mailing List CTA",
+      "default": "Sign up"
+    },
+    {
+      "type": "text",
+      "id": "social_headline",
+      "label": "Social Headline",
+      "default": "Follow Us"
+    },
+    {
+      "type": "text",
+      "id": "social_description",
+      "label": "Social Description",
+      "default": "Keep in touch via social media for more offers and inspiration to #keepyourhandsfree"
+    }
+  ]
+}
+{% endschema %}

@@ -7,7 +7,7 @@
 
   <div class="testimonial col-sm-3 mb-4 px-4 text-center">
     <a class="d-block text-reset text-decoration-none" href="{{ block.settings.cta_url }}">
-      <img class="testimonial__logo img-fluid mb-3" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" src="{{ block.settings.image | img_url: '360x', scale: 2, crop: 'center' }}">
+      <img class="testimonial__logo img-fluid mb-3" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" src="{{ block.settings.image | img_url: '400x300', scale: 2, crop: 'center' }}">
       <p class="testimonial__quote"><q>{{ block.settings.quote }}</q> <cite class="text-decoration-underline">{{ block.settings.publication }}</cite></p>
     </a>
   </div>
@@ -33,7 +33,7 @@
         {
           "id": "image",
           "type": "image_picker",
-          "label": "Publication Logo"
+          "label": "Publication Logo (Landscape 4:3)"
         },
         {
           "id": "publication",

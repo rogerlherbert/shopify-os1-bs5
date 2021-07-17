@@ -3,8 +3,8 @@
     {% if collection.image %}
     <div class="col-sm">
       <picture>
-        <source srcset="{{ collection.image | img_url: '768x', scale: 2 }}" media="(min-width: 576px)">
-        <img class="img-fluid" loading="lazy" width="{{ collection.image.width }}" height="{{ collection.image.height }}" src="{{ collection.image | img_url: '576x', scale: 2 }}" alt="{{ collection.title | escape }}">
+        <source srcset="{{ collection.image | img_url: '640x480', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
+        <img class="img-fluid" loading="lazy" width="{{ collection.image.width }}" height="{{ collection.image.height }}" src="{{ collection.image | img_url: '414x310', scale: 2, crop: 'center' }}" alt="{{ collection.title | escape }}">
       </picture>
     </div>
     {% endif %}
@@ -18,25 +18,33 @@
 </div>
 
 <div class="container">
+  <div class="d-none d-sm-block">
+  {% render 'nav-filters', collection: collection %}
+  </div>
 
-  {% paginate collection.products by 12 %}
-  {% render 'product-grid', products: collection.products %}
+  {% paginate collection.products by 18 %}
+
+  {% render 'product-grid', collection: collection %}
+
   {% if paginate.pages > 1 %}
     {% render 'pagination', paginate: paginate %}
   {% endif %}
+
   {% endpaginate %}
 
 </div>
 
-<div class="filters_trigger position-fixed start-50 translate-middle-x">
-  <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#filters-drawer"><i class="bi bi-filter"></i> Filters</button>
+<div class="d-sm-none">
+  <div class="filters_trigger position-fixed start-50 translate-middle-x">
+    <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#filters-drawer"><i class="bi bi-filter"></i> Filters</button>
+  </div>
+
+  <style>
+  .filters_trigger {
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    z-index: 1020;
+  }
+  </style>
+
+  {% render 'drawer-filters' %}
 </div>
-
-<style>
-.filters_trigger {
-  bottom: calc(1rem + env(safe-area-inset-bottom));
-  z-index: 1020;
-}
-</style>
-
-{% render 'drawer-filters' %}

@@ -20,11 +20,11 @@
                 class="form-check-input"
                 name="{{ filter_value.param_name }}"
                 value="{{ filter_value.value }}"
-                id="Filter-{{ filter.label }}-{{ forloop.index }}"
+                id="Filter-drawer-{{ filter.label }}-{{ forloop.index }}"
                 {% if filter_value.active -%}checked{%- endif %}
                 {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
               >
-              <label class="form-check-label d-flex justify-content-between" for="Filter-{{ filter.label }}-{{ forloop.index }}">{{ filter_value.label }} <span>{{ filter_value.count }}</span></label>
+              <label class="form-check-label d-flex justify-content-between" for="Filter-drawer-{{ filter.label }}-{{ forloop.index }}">{{ filter_value.label }} <span>{{ filter_value.count }}</span></label>
             </div>
             {%- endfor -%}
           </div>

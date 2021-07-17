@@ -3,18 +3,43 @@
     <p>Nothing found...</p>
   </div>
 {% else %}
+  {% liquid
+    assign is_filtered_view = false
+    if collection.filters != empty
+      for filter in collection.filters
+        if filter.active_values.size > 0
+          assign is_filtered_view = true
+          break
+        endif
+      endfor
+    endif
+  %}
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-  {% for product in products %}
-  <div class="col mb-3">
-    <div class="card h-100">
-      <img class="card-img-top h-auto" loading="lazy" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-      <div class="card-body">
-        <h5 class="card-title"><a class="stretched-link" href="{{ product.url | within: collection }}">{{ product.title }}</a></h5>
-        <p class="card-text">{{ product.price | money }}
-        {% unless product.available %}<br><strong>sold out</strong>{% endunless %}</p>
+  {% for product in collection.products %}
+
+    {% liquid
+      assign display_image = product.featured_image
+
+      unless product.has_only_default_variant or is_filtered_view == false
+        for variant in product.variants
+          if variant.matched and variant.image != null
+            assign display_image = variant.image
+            break
+          endif
+        endfor
+      endunless
+    %}
+
+    <div class="col mb-3">
+      <div class="card h-100">
+        <img class="card-img-top h-auto" loading="lazy" width="{{ display_image.width }}" height="{{ display_image.height }}" src="{{ display_image.src | img_url: '480x480', scale: 2, crop: 'center' }}" alt="{{ display_image.alt | escape }}">
+        <div class="card-body">
+          <h5 class="card-title"><a class="stretched-link" href="{{ product.url | within: collection }}">{{ product.title }}</a></h5>
+          <p class="card-text">{{ product.price | money }}
+          {% unless product.available %}<br><strong>sold out</strong>{% endunless %}</p>
+        </div>
       </div>
     </div>
-  </div>
   {% endfor %}
 </div>
 {% endunless %}

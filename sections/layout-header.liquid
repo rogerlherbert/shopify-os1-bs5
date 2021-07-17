@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row g-0 align-items-center">
     <div class="col-8 col-md-10 text-center" style="height: 60px;">
-      <a href="{{ routes.root_url }}"><img id="logo" class="img-fluid" loading="lazy" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" src="{{ section.settings.image | img_url: 'x60', scale: 2 }}" alt="logo" /></a>
+      <a href="{{ routes.root_url }}"><img id="logo" class="img-fluid" loading="eager" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" src="{{ section.settings.image | img_url: 'x60', scale: 2 }}" alt="logo" /></a>
     </div>
     <div class="col order-first text-center fs-2">
       <a href="#nav-drawer" data-bs-toggle="offcanvas"><i class="bi bi-list"></i></a>
@@ -23,7 +23,7 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Logo"
+      "label": "Logo (3:1)"
     }
   ]
 }
