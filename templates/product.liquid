@@ -23,7 +23,7 @@
 
       <div id="productImagesGrid" class="d-none d-sm-block">
       {% for image in product.images %}
-        {% unless image.attached_to_variant? %}
+        {% unless image.attached_to_variant? and image.position > 1 %}
           <img src="{{ image.src | img_url: '768x', scale: 2 }}" class="img-fluid" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt | escape }}">
         {% endunless %}
       {% endfor %}
@@ -34,7 +34,25 @@
       <div class="mx-sm-3 position-sticky" style="top: 60px;">
         <div><a href="{{ routes.root_url }}">Home</a> / {% if collection %}<a href="{{ collection.url }}">{{ collection.title }}</a> /{% endif %}</div>
         <h1>{{ product.title }}</h1>
-        <p>{{ current_variant.price | money }}</p>
+        <p id="priceBlock">
+        {% if current_variant.compare_at_price > current_variant.price %}
+          <span id="variantPrice">{{ current_variant.price | money_without_trailing_zeros }}</span>
+          <s><span id="variantCompareAtPrice">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span></s>
+        {% else %}
+          <span id="variantPrice">{{ current_variant.price | money_without_trailing_zeros }}</span>
+        {% endif %}
+
+        {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+          <div class="product__policies rte" data-product-policies>
+            {%- if cart.taxes_included -%}
+              Taxes included.&nbsp;
+            {%- endif -%}
+            {%- if shop.shipping_policy.body != blank -%}
+              Shipping calculated at checkout.
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        </p>
 
         <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
           {% unless product.has_only_default_variant %}
@@ -61,6 +79,9 @@
 
           <div class="d-grid gap-2 mb-3">
             <button type="submit" name="add" id="AddToCart" class="btn btn-primary btn-lg"{% unless current_variant.available %} disabled="disabled"{% endunless %}>{% if current_variant.available %}Add to cart{% else %}Out Of Stock{% endif %}</button>
+            {% if additional_checkout_buttons %}
+              <div class="additional_checkout_buttons">{{ content_for_additional_checkout_buttons }}</div>
+            {% endif %}
           </div>
         </form>
 
@@ -68,6 +89,7 @@
         <script>
           let selectCallback = function(variant, selector) {
             // update availability, price and image when variant changes
+            console.log(variant);
 
             if (typeof variant !== "undefined" && variant !== null) {
 
@@ -76,6 +98,7 @@
                 enableSubmitButton();
 
                 // TODO - change price
+                changePrice(variant.price, variant.compare_at_price);
 
                 if (variant.featured_image !== null) {
                   scrollCarouselToVariantImage(variant.featured_image.position - 1);
@@ -87,6 +110,7 @@
                 disableSubmitButton();
 
                 // TODO - change price
+                changePrice(variant.price, variant.compare_at_price);
 
                 if (variant.featured_image !== null) {
                   scrollCarouselToVariantImage(variant.featured_image.position - 1);
@@ -128,8 +152,31 @@
             featured_image_el.src = variant_image.src;
           }
 
-          function changePrice() {
-            // TODO
+          function changePrice(unformatted_price, unformatted_compare_at_price) {
+
+            let price_block_el = document.querySelector("#priceBlock");
+            let format_param = "{{ cart.currency.symbol }}{% raw %}{{ amount_no_decimals }}{% endraw %}";
+            let display_price = Shopify.formatMoney(unformatted_price, format_param);
+            let display_price_el = document.createElement("span");
+
+            display_price_el.setAttribute("id", "variantPrice");
+            display_price_el.textContent = display_price;
+
+            if (unformatted_compare_at_price !== null && unformatted_compare_at_price > unformatted_price) {
+              let compare_at_price = Shopify.formatMoney(unformatted_compare_at_price, format_param);
+              let compare_at_price_el = document.createElement("span");
+              let strikethrough_el = document.createElement("s");
+
+              compare_at_price_el.setAttribute("id", "variantCompareAtPrice");
+              compare_at_price_el.textContent = compare_at_price;
+              strikethrough_el.append(compare_at_price_el);
+
+              price_block_el.replaceChildren(display_price_el, strikethrough_el);
+
+            } else {
+              price_block_el.replaceChildren(display_price_el);
+
+            }
           }
 
           function addBootstrapClassesToForm() {

@@ -1,0 +1,59 @@
+{% assign col_max_width = section.settings.card_width_rems %}
+
+<h2 class="text-center mb-3">{{ section.settings.header }}</h2>
+
+<div class="overflow-scroll">
+  <div class="mx-auto" style="width: {{ col_max_width | times: section.blocks.size }}rem;">
+    <div class="mx-2">
+      <div class="row justify-content-center">
+
+        {% for block in section.blocks %}
+        <div class="col" style="width: {{ col_max_width }}rem;" {{ block.shopify_attributes }}>
+          {% render 'product-card', product: block.settings.product, image: block.settings.product.featured_image %}
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Carousel",
+  "class": "product-carousel",
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "id": "product",
+          "type": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "id": "header",
+      "type": "text",
+      "label": "Header",
+      "default": "Products"
+    },
+    {
+      "id": "card_width_rems",
+      "type": "number",
+      "label": "Card width in rems",
+      "default": 21
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Carousel",
+      "category": "Repeatable Blocks"
+    }
+  ]
+}
+{% endschema %}

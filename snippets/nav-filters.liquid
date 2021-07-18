@@ -5,12 +5,13 @@
 
     <div class="col-auto">
       <div class="dropdown">
-        <button class="btn btn-outline-secondary dropdown-toggle" id="filter-{{ filter.label | handleize }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" type="button" aria-expanded="false">Colour</button>
+        <button class="btn btn-outline-secondary dropdown-toggle" id="browse-by-colour" data-bs-toggle="dropdown" data-bs-auto-close="outside" type="button" aria-expanded="false">Colour</button>
 
-        <ul class="dropdown-menu" aria-labelledby="filter-{{ filter.label | handleize }}">
+        <ul class="dropdown-menu" aria-labelledby="browse-by-colour">
+          {% assign is_tagged_view = false %}
           {% for colour_tag in linklists.phone-colour-tags.links %}
             <li>
-              <a class="dropdown-item" href="{{ colour_tag.url }}">
+              <a class="dropdown-item{% if colour_tag.active %}{% assign is_tagged_view = true %} active{% endif %}" href="{{ colour_tag.url }}">
                 {{ colour_tag.title }}
               </a>
             </li>
@@ -19,12 +20,14 @@
       </div>
     </div>
 
+    {% unless is_tagged_view %}
     <div class="col-auto">Filters: </div>
 
     {%- for filter in collection.filters -%}
+    {% if filter.values.size > 1 %}
     <div class="col-auto gx-2">
       <div class="dropdown">
-        <button class="btn btn-outline-secondary dropdown-toggle" id="filter-{{ filter.label | handleize }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" type="button" aria-expanded="false">{{ filter.label }}</button>
+        <button class="btn {% if filter.active_values.size > 0 %}btn-secondary{% else %}btn-outline-secondary{% endif %} dropdown-toggle" id="filter-{{ filter.label | handleize }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" type="button" aria-expanded="false">{{ filter.label }}</button>
 
         <ul class="dropdown-menu" aria-labelledby="filter-{{ filter.label | handleize }}">
           {%- for filter_value in filter.values -%}
@@ -51,12 +54,19 @@
 
       </div>
     </div>
+    {% endif %}
     {% endfor %}
 
     <div class="col-auto">
       <button class="btn btn-primary" type="submit">Apply</button>
       <a class="btn btn-link" href="{{ collection.url }}">Clear all</a>
     </div>
+
+    {% else %}
+    <div class="col-auto">
+      <a class="btn btn-link" href="{{ collections['phone-necklaces'].url }}">Clear all</a>
+    </div>
+  {% endunless %}
   </div>
 </form>
 {% endunless %}

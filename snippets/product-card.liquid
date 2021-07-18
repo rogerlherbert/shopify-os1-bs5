@@ -1,0 +1,14 @@
+<div class="card h-100">
+  <img class="card-img-top h-auto" loading="lazy" width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src | img_url: '480x480', scale: 2, crop: 'center' }}" alt="{{ image.alt | escape }}">
+  <div class="card-body">
+    <h5 class="card-title"><a class="stretched-link" href="{{ product.url | within: collection }}">{{ product.title }}</a></h5>
+    <p class="card-text">
+      {% if product.price_varies %}
+        from {{ product.price_min | money_without_trailing_zeros }}
+      {% else %}
+        {{ product.price | money_without_trailing_zeros }}
+      {% endif %}
+      {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+    </p>
+  </div>
+</div>

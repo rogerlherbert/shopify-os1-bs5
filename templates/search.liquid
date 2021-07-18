@@ -7,11 +7,6 @@
     </div>
   </form>
 
-  {% paginate search.results by 24 %}
-    {% render 'product-grid', products: search.results %}
-    {% if paginate.pages > 1 %}
-      {% render 'pagination', paginate: paginate %}
-    {% endif %}
-  {% endpaginate %}
+  {% render 'product-grid', products: search.results %}
 
 </div>

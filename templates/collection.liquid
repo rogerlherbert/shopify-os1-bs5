@@ -24,14 +24,13 @@
 
   {% paginate collection.products by 18 %}
 
-  {% render 'product-grid', collection: collection %}
+  {% render 'product-grid', products: collection.products, filters: collection.filters %}
 
   {% if paginate.pages > 1 %}
     {% render 'pagination', paginate: paginate %}
   {% endif %}
 
   {% endpaginate %}
-
 </div>
 
 <div class="d-sm-none">
