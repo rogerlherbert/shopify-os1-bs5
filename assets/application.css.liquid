@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'Value';
+  src:  url('value-regular.woff2') format('woff2'),
+        url('value-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Value Bold';
+  src:  url('value-bold.woff2') format('woff2'),
+        url('value-bold.woff') format('woff');
+}
+
+:root {
+  --xx-black: #231e00;
+  --xx-blue: #3778ff;
+
+  --bs-primary: var(--xx-blue);
+  --bs-font-sans-serif: Value, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+  font-family: "Value Bold";
+}
+
+.btn {
+  border-radius: 0.2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05rem;
+}
+
+.btn-lg {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-size: 1rem;
+}
+
+.xx-product-grid {
+  border-color: transparent;
+}
+
+.xx-product-grid__link {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--xx-black);
+}
+
+.xx-product-grid__link:hover {
+  color: var(--xx-black);
+}
+
+.xx-news {
+  border-color: transparent;
+}
+
+.xx-breadcrumbs__link {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--xx-black);
+}

@@ -1,57 +1,61 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 
+<div id="productImagesCarousel" class="carousel slide d-sm-none">
+  <div class="carousel-indicators">
+    {% assign slideCounter = 1 %}
+    {% for image in product.images %}
+      <button type="button" data-bs-target="#productImagesCarousel" data-bs-slide-to="{{ slideCounter | minus: 1 }}"{% if forloop.first == true %} class="active"{% endif%} aria-current="true" aria-label="Slide {{ slideCounter }}"></button>
+      {% assign slideCounter = slideCounter | plus: 1 %}
+    {% endfor %}
+  </div>
+  <div class="carousel-inner">
+    {% for image in product.images %}
+      <div class="carousel-item{% if forloop.first == true %} active{% endif%}">
+        <img src="{{ image.src | img_url: '576x', scale: 2 }}" class="d-block img-fluid" width="{{ image.width }}" height="{{ image.height }}"{% unless image.attached_to_variant? %} loading="lazy"{% else %} loading="auto"{% endunless %} alt="{{ image.alt | escape }}">
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
 <div class="container">
   <div class="row g-0 mb-3">
 
     <div class="col-sm-7 mb-3">
-      <div id="productImagesCarousel" class="carousel slide d-sm-none">
-        <div class="carousel-indicators">
-          {% assign slideCounter = 1 %}
-          {% for image in product.images %}
-            <button type="button" data-bs-target="#productImagesCarousel" data-bs-slide-to="{{ slideCounter | minus: 1 }}"{% if forloop.first == true %} class="active"{% endif%} aria-current="true" aria-label="Slide {{ slideCounter }}"></button>
-            {% assign slideCounter = slideCounter | plus: 1 %}
-          {% endfor %}
-        </div>
-        <div class="carousel-inner">
-          {% for image in product.images %}
-            <div class="carousel-item{% if forloop.first == true %} active{% endif%}">
-              <img src="{{ image.src | img_url: '576x', scale: 2 }}" class="d-block img-fluid" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt | escape }}">
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-
-      <div id="productImagesGrid" class="d-none d-sm-block">
+      <div id="productImagesGrid" class="d-none d-sm-flex flex-column">
       {% for image in product.images %}
-        {% unless image.attached_to_variant? and image.position > 1 %}
-          <img src="{{ image.src | img_url: '768x', scale: 2 }}" class="img-fluid" width="{{ image.width }}" height="{{ image.height }}" loading="lazy" alt="{{ image.alt | escape }}">
-        {% endunless %}
+        <img src="{{ image.src | img_url: '768x', scale: 2 }}" class="img-fluid" id="productImage-{{ image.position }}" width="{{ image.width }}" height="{{ image.height }}"{% unless image.attached_to_variant? %} loading="lazy"{% else %} loading="auto"{% endunless %} alt="{{ image.alt | escape }}">
       {% endfor %}
       </div>
     </div>
 
     <div class="col-sm-5">
-      <div class="mx-sm-3 position-sticky" style="top: 60px;">
-        <div><a href="{{ routes.root_url }}">Home</a> / {% if collection %}<a href="{{ collection.url }}">{{ collection.title }}</a> /{% endif %}</div>
-        <h1>{{ product.title }}</h1>
-        <p id="priceBlock">
-        {% if current_variant.compare_at_price > current_variant.price %}
-          <span id="variantPrice">{{ current_variant.price | money_without_trailing_zeros }}</span>
-          <s><span id="variantCompareAtPrice">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span></s>
-        {% else %}
-          <span id="variantPrice">{{ current_variant.price | money_without_trailing_zeros }}</span>
-        {% endif %}
+      <div class="mx-sm-5 position-sticky" style="top: 120px;">
 
-        {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
-          <div class="product__policies rte" data-product-policies>
+        <div class="xx-breadcrumbs text-center"><small><a class="xx-breadcrumbs__link" href="{{ routes.root_url }}">Home</a> / {% if collection %}<a class="xx-breadcrumbs__link" href="{{ collection.url }}">{{ collection.title }}</a> /{% endif %}</small></div>
+
+        <h1 class="text-uppercase text-center">{{ product.title }}</h1>
+
+        <p class="text-center mb-5">
+          <span id="priceBlock">
+          {% if current_variant.compare_at_price > current_variant.price %}
+            <span id="variantPrice">{{ current_variant.price | money_without_trailing_zeros }}</span>
+            <s><span id="variantCompareAtPrice">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span></s>
+          {% else %}
+            <span id="variantPrice">{{ current_variant.price | money_without_trailing_zeros }}</span>
+          {% endif %}
+          </span>
+
+          {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+          <small class="text-secondary"><br>
             {%- if cart.taxes_included -%}
-              Taxes included.&nbsp;
+            Taxes included.&nbsp;
             {%- endif -%}
+
             {%- if shop.shipping_policy.body != blank -%}
-              Shipping calculated at checkout.
+            Shipping calculated at checkout.
             {%- endif -%}
-          </div>
-        {%- endif -%}
+          </small>
+          {%- endif -%}
         </p>
 
         <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
@@ -89,8 +93,6 @@
         <script>
           let selectCallback = function(variant, selector) {
             // update availability, price and image when variant changes
-            console.log(variant);
-
             if (typeof variant !== "undefined" && variant !== null) {
 
               if (variant.available) {
@@ -148,8 +150,14 @@
           }
 
           function replaceFeaturedImageWithVariantImage(variant_image) {
-            let featured_image_el = document.querySelector('#productImagesGrid img');
-            featured_image_el.src = variant_image.src;
+            let product_images_arr = document.querySelectorAll('#productImagesGrid img');
+            let variant_image_el = document.querySelector('#productImage-' + variant_image.position);
+
+            product_images_arr.forEach(function(item) {
+              item.classList.remove("order-first");
+            });
+
+            variant_image_el.classList.add("order-first");
           }
 
           function changePrice(unformatted_price, unformatted_compare_at_price) {
@@ -217,10 +225,15 @@
     </div>
   </div>
 
-  {% assign feature_image = images['2048x1152.png'] %}
+  {% assign feature_image = images['1200x900.png'] %}
 
   <div class="row g-0">
-    <div class="col-sm-6"><img class="img-fluid" loading="lazy" width="{{ feature_image.width }}" height="{{ feature_image.height }}" src="{{ feature_image | img_url }}"></div>
+    <div class="col-sm-6">
+      <picture>
+        <source srcset="{{ feature_image | img_url: '800x600', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
+        <img class="img-fluid" loading="lazy" width="{{ feature_image.width }}" height="{{ feature_image.height }}" src="{{ feature_image | img_url: '400x300', scale: 2, crop: 'center' }}" alt="{{ feature_image.alt | escape }}">
+      </picture>
+    </div>
     <div class="col-sm-6">
       <div class="h-100 p-5 d-flex flex-column justify-content-center text-center">
         <h3>This is a feature</h3>
@@ -230,7 +243,12 @@
   </div>
 
   <div class="row g-0">
-    <div class="col-sm-6"><img class="img-fluid" loading="lazy" width="{{ feature_image.width }}" height="{{ feature_image.height }}" src="{{ feature_image | img_url }}"></div>
+    <div class="col-sm-6">
+      <picture>
+        <source srcset="{{ feature_image | img_url: '800x600', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
+        <img class="img-fluid" loading="lazy" width="{{ feature_image.width }}" height="{{ feature_image.height }}" src="{{ feature_image | img_url: '400x300', scale: 2, crop: 'center' }}" alt="{{ feature_image.alt | escape }}">
+      </picture>
+    </div>
     <div class="col-sm-6 order-sm-first">
       <div class="h-100 p-5 d-flex flex-column justify-content-center text-center">
         <h3>This is a feature</h3>
@@ -240,7 +258,12 @@
   </div>
 
   <div class="row g-0">
-    <div class="col-sm-6"><img class="img-fluid" loading="lazy" width="{{ feature_image.width }}" height="{{ feature_image.height }}" src="{{ feature_image | img_url }}"></div>
+    <div class="col-sm-6">
+      <picture>
+        <source srcset="{{ feature_image | img_url: '800x600', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
+        <img class="img-fluid" loading="lazy" width="{{ feature_image.width }}" height="{{ feature_image.height }}" src="{{ feature_image | img_url: '400x300', scale: 2, crop: 'center' }}" alt="{{ feature_image.alt | escape }}">
+      </picture>
+    </div>
     <div class="col-sm-6">
       <div class="h-100 p-5 d-flex flex-column justify-content-center text-center">
         <h3>This is a feature</h3>
@@ -252,3 +275,5 @@
   <hr class="my-5 invisible">
   {% section 'product-recommendations' %}
 </div>
+
+{% render 'json-ld-product', product: product %}

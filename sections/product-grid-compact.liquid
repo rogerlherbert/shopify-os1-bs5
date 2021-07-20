@@ -1,0 +1,37 @@
+<div>
+  <div class="row gx-0">
+    {% for block in section.blocks %}
+    <div class="col-6 col-sm-3">
+      <a href="{{ block.settings.product.url }}">
+        <img class="img-fluid" loading="lazy" width="{{ block.settings.product.featured_image.width }}" height="{{ block.settings.product.featured_image.height }}" alt="{{ block.settings.product.featured_image.alt | escape }}" src="{{ block.settings.product.featured_image | img_url: '360x360', scale: 2, crop: 'center' }}">
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Compact Product Grid",
+  "class": "compact-product-grid",
+  "blocks": [
+    {
+      "type": "grid-item",
+      "name": "Product",
+      "settings": [
+        {
+          "id": "product",
+          "type": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Compact Product Grid",
+      "category": "Repeatable Blocks"
+    }
+  ]
+}
+{% endschema %}

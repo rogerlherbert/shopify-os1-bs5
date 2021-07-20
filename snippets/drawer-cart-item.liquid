@@ -6,11 +6,13 @@
       </a>
     </div>
     <div class="col pe-0">
-      <a class="float-end" href="/cart/change?line={{ forloop.index }}&amp;quantity=0"><i class="bi bi-x-lg"></i></a>
+      <a class="float-end" href="/cart/change?line={{ position }}&amp;quantity=0"><i class="bi bi-x-lg"></i></a>
 
       <div class="mb-2">
         <a href="{{ item.url }}">{{ item.product.title }}</a><br>
+        {% unless item.product.has_only_default_variant %}
         <span class="small">{{ item.variant.title }}</span>
+        {% endunless %}
       </div>
 
       <div class="row">

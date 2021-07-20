@@ -8,13 +8,13 @@
       {% if cart.item_count > 0 %}
       <div class="cart__items">
         {% for item in cart.items %}
-          {% render 'drawer-cart-item' item: item %}
+          {% render 'drawer-cart-item' item: item, position: forloop.index %}
         {% endfor %}
       </div>
 
       <div class="cart__summary">
         <dl class="row">
-          <dt class="col-6">Subtotal{% if cart.taxes_included %} incl. VAT{% endif %}</dt>
+          <dt class="col-6">Subtotal{% if cart.taxes_included %} incl. taxes{% endif %}</dt>
           <dd class="col-6 text-end">{{ cart.total_price | money }}</dd>
 
           <dt class="col-6">Shipping</dt>

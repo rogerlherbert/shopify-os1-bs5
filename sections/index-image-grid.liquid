@@ -1,20 +1,22 @@
-<h2 class="text-center mb-3">{{ section.settings.title }}</h2>
+{% if section.settings.title %}<h2 class="text-center mb-3">{{ section.settings.title }}</h2>{% endif %}
 
-<div class="">
+<div>
   <div class="row gx-0">
     {% for block in section.blocks %}
     <div class="col-sm mb-3">
-      <a href="{{ block.settings.post_url }}">
-        <img class="img-fluid" loading="lazy" width="{{ block.settings.post_image.width }}" height="{{ block.settings.post_image.height }}" alt="{{ block.settings.post_image.alt | escape }}" src="{{ block.settings.post_image | img_url: '360x360', scale: 2, crop: 'center' }}">
+      <a href="{{ block.settings.link_url }}" target="_blank" rel="noopener">
+        <img class="img-fluid" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" alt="{{ block.settings.image.alt | escape }}" src="{{ block.settings.image | img_url: '360x360', scale: 2, crop: 'center' }}">
       </a>
     </div>
     {% endfor %}
   </div>
 </div>
 
+{% if section.settings.cta_url %}
 <div class="text-center mt-3">
-  <a class="btn btn-outline-secondary" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+  <a class="btn btn-outline-secondary" href="{{ section.settings.cta_url }}" target="_blank" rel="noopener">{{ section.settings.cta_label }}</a>
 </div>
+{% endif %}
 
 {% schema %}
 {
@@ -23,17 +25,17 @@
   "blocks": [
     {
       "type": "card",
-      "name": "Social Post",
+      "name": "Image",
       "settings": [
         {
           "type": "image_picker",
-          "id": "post_image",
-          "label": "Post Image (Square 1:1)"
+          "id": "image",
+          "label": "Image (Square 1:1)"
         },
         {
           "type": "url",
-          "id": "post_url",
-          "label": "Post URL"
+          "id": "link_url",
+          "label": "Link URL"
         }
       ]
     }

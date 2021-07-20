@@ -1,8 +1,8 @@
 <div class="masthead__wrapper text-center" id="masthead-{{ section.id }}">
   <div class="d-flex flex-column justify-content-center align-items-center vh-100 px-5">
     <h2 class="display-1">{{ section.settings.headline }}</h2>
-    <p>{{ section.settings.subline }}</p>
-    <a class="btn btn-primary btn-lg" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+    {% if section.settings.subline %}<p class="lead">{{ section.settings.subline }}</p>{% endif %}
+    {% if section.settings.cta_url %}<a class="btn btn-primary btn-lg" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>{% endif %}
   </div>
 </div>
 

@@ -1,6 +1,7 @@
 {% unless collection.filters == empty %}
 <form>
   <div class="row mb-3 align-items-center">
+    {% if collection.metafields.xou.show_browse_by_colour == true %}
     <div class="col-auto">Browse by: </div>
 
     <div class="col-auto">
@@ -19,6 +20,7 @@
         </ul>
       </div>
     </div>
+    {% endif %}
 
     {% unless is_tagged_view %}
     <div class="col-auto">Filters: </div>
@@ -32,7 +34,7 @@
         <ul class="dropdown-menu" aria-labelledby="filter-{{ filter.label | handleize }}">
           {%- for filter_value in filter.values -%}
             <li>
-              <div class="dropdown-item">
+              <div class="dropdown-item{% if filter_value.count == 0 and filter_value.active == false %} disabled{% endif %}">
                 <div class="form-check">
                   <input type="checkbox"
                     class="form-check-input"

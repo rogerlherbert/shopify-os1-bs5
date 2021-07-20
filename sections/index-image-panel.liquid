@@ -2,15 +2,15 @@
   <div class="row gx-0">
     <div class="col-sm">
       <picture>
-        <source srcset="{{ section.settings.image | img_url: '800x600', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
-        <img class="img-fluid" loading="lazy" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" src="{{ section.settings.image | img_url: '400x300', scale: 2, crop: 'center' }}" alt="{{ section.settings.image.alt | escape }}">
+        <source srcset="{{ section.settings.image | img_url: '800x800', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
+        <img class="img-fluid" loading="lazy" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" src="{{ section.settings.image | img_url: '400x400', scale: 2, crop: 'center' }}" alt="{{ section.settings.image.alt | escape }}">
       </picture>
     </div>
     <div class="col-sm{% if section.settings.image_align == 'right' %} order-sm-first{% endif %}">
       <div class="col-10 col-sm-8 offset-1 offset-sm-2 h-100 py-5 text-center d-flex flex-column justify-content-center align-items-center">
         <h2 class="display-4">{{ section.settings.headline }}</h2>
-        <p class="mb-3">{{ section.settings.subline }}</p>
-        <a class="btn btn-primary" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+        {% if section.settings.subline %}<p class="mb-3">{{ section.settings.subline }}</p>{% endif %}
+        {% if section.settings.cta_url %}<a class="btn btn-primary" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>{% endif %}
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
     {
       "id": "image",
       "type": "image_picker",
-      "label": "Image (Landscape 4:3)"
+      "label": "Image (Square 1:1)"
     },
     {
       "type": "radio",

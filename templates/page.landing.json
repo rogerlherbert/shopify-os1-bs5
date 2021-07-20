@@ -1,0 +1,11 @@
+{
+  "name": "Landing Page",
+  "sections": {
+    "header": {
+      "type": "index-masthead-image"
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

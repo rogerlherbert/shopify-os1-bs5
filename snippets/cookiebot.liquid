@@ -1,0 +1,13 @@
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="00000000-0000-0000-0000-000000000000" type="text/javascript" async></script>
+<script>
+  window.addEventListener("CookiebotOnConsentReady", function() {
+    var c = Cookiebot.consent,
+        p = c.preferences,
+        s = c.statistics,
+        m = c.marketing,
+        tracking = p && s && m ? true : false;
+    window.Shopify.customerPrivacy.setTrackingConsent(tracking, function() {
+      console.log("Tracking " + (tracking ? "en" : "dis") + "abled");
+    });
+  });
+</script>

@@ -9,12 +9,12 @@
 
         {% for block in section.blocks %}
         <div class="col" style="width: {{ col_max_width }}rem;" {{ block.shopify_attributes }}>
-          <div class="card h-100">
-            <img class="img-fluid card-img-top" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" src="{{ block.settings.image | img_url: '414x414', scale: 2, crop: 'center' }}" alt="{{ block.settings.image.alt }}">
-            <div class="card-body">
-              <h5 class="card-title">{{ block.settings.headline }}</h5>
+          <div class="card h-100 xx-news">
+            <img class="img-fluid card-img-top xx-news__image" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" src="{{ block.settings.image | img_url: '414x414', scale: 2, crop: 'center' }}" alt="{{ block.settings.image.alt }}">
+            <div class="card-body text-center">
+              <h5 class="card-title text-uppercase xx-news__title">{{ block.settings.headline }}</h5>
               <p class="card-text">{{ block.settings.description }}</p>
-              {% if block.settings.cta_url != blank %}<a href="{{ block.settings.cta_url }}" class="btn btn-primary">{{ block.settings.cta_label }}</a>{% endif %}
+              {% if block.settings.cta_url != blank %}<a href="{{ block.settings.cta_url }}" class="btn btn-outline-secondary xx-news__link">{{ block.settings.cta_label }}</a>{% endif %}
             </div>
           </div>
         </div>

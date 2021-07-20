@@ -30,7 +30,7 @@
       endunless
     %}
 
-    <div class="col mb-3">
+    <div class="col mb-3{% unless product.available %} order-last{% endunless %}">
       {% render 'product-card', product: product, image: display_image %}
     </div>
   {% endfor %}
