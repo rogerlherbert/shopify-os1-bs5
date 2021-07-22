@@ -1,0 +1,7 @@
+<div class="xx-colour-nav">
+{% for link_lv1 in list.links %}
+  <a class="xx-colour-nav__swatch xx-colour-nav__swatch--{{ link_lv1.title | handleize }}" href="{{ link_lv1.url }}">
+    <span class="xx-colour-nav__link-text">{{ link_lv1.title }}</span>
+  </a>
+{% endfor %}
+</div>

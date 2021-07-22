@@ -1,0 +1,127 @@
+@font-face {
+  font-family: 'Value';
+  src:  url('value-regular.woff2') format('woff2'),
+        url('value-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Value Bold';
+  src:  url('value-bold.woff2') format('woff2'),
+        url('value-bold.woff') format('woff');
+}
+
+:root {
+  --xx-black: #231e00;
+  --xx-blue: #3778ff;
+  --xx-sand: #bda688;
+  --xx-power-pink: #fc5a9f;
+  --xx-earth: #2b251b;
+  --xx-electric-green: #3bcb8e;
+  --xx-vibrant-orange: #f7702b;
+  --xx-taupe: #a48f7a;
+  --xx-sage: #43695b;
+  --xx-chalk: #e9e0d2;
+  --xx-rusty-red: #c05720;
+  --xx-baby-blue: #9caad2;
+  --xx-powder-pink: #e1af91;
+  --xx-caramel: #c3961e;
+  --xx-living-coral: #ff8e83;
+  --xx-terrazzo: #dad8ac;
+  --xx-light-olive: #92b77e;
+  --xx-lilac: #e6b4ec;
+  --xx-neon-orange: #ff5421;
+
+  --bs-primary: var(--xx-blue);
+  --bs-font-sans-serif: Value, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+  font-family: "Value Bold";
+}
+
+.btn {
+  border-radius: 0.2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05rem;
+}
+
+.btn-lg {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-size: 1rem;
+}
+
+.xx-product-grid {
+  border-color: transparent;
+}
+
+.xx-product-grid__link {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--xx-black);
+}
+
+.xx-product-grid__link:hover {
+  color: var(--xx-black);
+}
+
+.xx-news {
+  border-color: transparent;
+}
+
+.xx-breadcrumbs__link {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--xx-black);
+}
+
+.xx-colour-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.xx-colour-nav__swatch {
+  display: flex;
+  margin: 0.5rem;
+}
+
+.xx-colour-nav__swatch::before {
+  display: inline-flex;
+  content: "";
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+}
+
+.xx-colour-nav__link-text {
+  display: none;
+}
+
+.xx-colour-nav__swatch--black::before { background-color: var(--xx-black); }
+.xx-colour-nav__swatch--blue::before { background-color: var(--xx-blue); }
+.xx-colour-nav__swatch--sand::before { background-color: var(--xx-sand); }
+.xx-colour-nav__swatch--power-pink::before { background-color: var(--xx-power-pink); }
+.xx-colour-nav__swatch--earth::before { background-color: var(--xx-earth); }
+.xx-colour-nav__swatch--electric-green::before { background-color: var(--xx-electric-green); }
+.xx-colour-nav__swatch--vibrant-orange::before { background-color: var(--xx-vibrant-orange); }
+.xx-colour-nav__swatch--taupe::before { background-color: var(--xx-taupe); }
+.xx-colour-nav__swatch--sage::before { background-color: var(--xx-sage); }
+.xx-colour-nav__swatch--chalk::before { background-color: var(--xx-chalk); }
+.xx-colour-nav__swatch--rusty-red::before { background-color: var(--xx-rusty-red); }
+.xx-colour-nav__swatch--powder-pink::before { background-color: var(--xx-powder-pink); }
+.xx-colour-nav__swatch--caramel::before { background-color: var(--xx-caramel); }
+.xx-colour-nav__swatch--living-coral::before { background-color: var(--xx-living-coral); }
+.xx-colour-nav__swatch--terrazzo::before { background-color: var(--xx-terrazzo); }
+.xx-colour-nav__swatch--light-olive::before { background-color: var(--xx-light-olive); }
+.xx-colour-nav__swatch--lilac::before { background-color: var(--xx-lilac); }
+.xx-colour-nav__swatch--neon-orange::before { background-color: var(--xx-neon-orange); }
+.xx-colour-nav__swatch--orange-camouflage::before { background-color: var(--xx-light-olive); border-color: var(--xx-neon-orange); }

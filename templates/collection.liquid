@@ -10,7 +10,7 @@
     {% endif %}
     <div class="col-sm py-3 text-center">
       <div class="col-10 offset-1">
-      <h1>{{ collection.title }}</h1>
+      <h1>{{ collection.title }}{% if current_tags %} - {{ current_tags }}{% endif %}</h1>
       <div>{{ collection.description }}</div>
       </div>
     </div>
@@ -34,7 +34,8 @@
 </div>
 
 <div class="d-sm-none">
-  <div class="filters_trigger position-fixed start-50 translate-middle-x">
+  <div class="filters_trigger position-fixed start-0 w-100 text-center">
+    <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#colours-drawer"><i class="bi bi-palette"></i> Colours</button>
     <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#filters-drawer"><i class="bi bi-filter"></i> Filters</button>
   </div>
 
@@ -45,5 +46,6 @@
   }
   </style>
 
+  {% render 'drawer-colours' %}
   {% render 'drawer-filters' %}
 </div>

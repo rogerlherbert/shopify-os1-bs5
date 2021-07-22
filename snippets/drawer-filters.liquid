@@ -6,13 +6,14 @@
   <div class="offcanvas-body">
     <form class="filter-form mx-3 pb-5">
       {%- for filter in collection.filters -%}
+      {% if filter.values.size > 1 %}
         <div class="filter-group">
           {% comment %} name of filter {% endcomment %}
-          <div class="filter-group-summary mb-3">
+          <div class="filter-group__summary mb-3">
             <h6>{{ filter.label }}</h6>
           </div>
 
-          <div class="filter-group-display">
+          <div class="filter-group__display">
             {% comment %} render list filters {% endcomment %}
             {%- for filter_value in filter.values -%}
             <div class="form-check mb-3">
@@ -30,6 +31,7 @@
           </div>
           <hr>
         </div>
+      {% endif %}
       {%- endfor -%}
 
       <div class="active-filters position-fixed bottom-0 start-0 end-0 px-3 pt-3" style="background-color: white; padding-bottom: calc(1rem + env(safe-area-inset-bottom));">
