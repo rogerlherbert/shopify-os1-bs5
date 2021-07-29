@@ -1,34 +1,35 @@
 <!doctype html>
-<html>
-<head>
-  <title>{{ page_title }}</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="{{ page_description | escape }}">
-  <link rel="canonical" href="{{ canonical_url }}">
-  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  {{ content_for_header }} <!-- Header hook for plugins -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  {{ 'application.css' | asset_url | stylesheet_tag }}
-  <script src="{{ 'application.js' | asset_url }}" defer></script>
-</head>
-<body class="{{ template.name | default: handle }} position-relative" id="{{ handle | default: template.name }}">
-  <header class="position-sticky top-0" style="z-index: 1020; background-color: white;">
-    {% section 'layout-header' %}
-  </header>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="{{ page_description | escape }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    {{ content_for_header }} <!-- Header hook for plugins -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    {{ 'application.css' | asset_url | stylesheet_tag }}
+    <link rel="canonical" href="{{ canonical_url }}">
+    <title>{{ page_title }}</title>
+  </head>
+  <body class="{{ template.name | default: handle }} position-relative" id="{{ handle | default: template.name }}">
+    <header class="position-sticky top-0" style="z-index: 1020; background-color: white;">
+      {% section 'layout-header' %}
+    </header>
 
-  <main role="main">
-    {% section 'layout-announcement-bar' %}
-    {{ content_for_layout }}
-  </main>
+    <main role="main">
+      {% section 'layout-announcement-bar' %}
+      {{ content_for_layout }}
+    </main>
 
-  {% section 'layout-footer' %}
+    {% section 'layout-footer' %}
 
-  {% render 'drawer-nav' %}
+    {% render 'drawer-nav' %}
 
-  {% render 'drawer-cart' %}
+    {% render 'drawer-cart' %}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+    <script src="{{ 'theme-cart.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'application.js' | asset_url }}" defer></script>
+  </body>
 </html>

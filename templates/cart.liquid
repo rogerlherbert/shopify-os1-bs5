@@ -1,0 +1,23 @@
+<h1 class="text-center my-5">Your Cart</h1>
+
+<form action="{{ routes.cart_url }}" method="post">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 offset-sm-2">
+      <div class="cart__items">
+        {% for item in cart.items %}
+          {% render 'cart-item' item: item %}
+        {% endfor %}
+      </div>
+      <div class="cart__updater my-3 text-center">
+        <input class="btn btn-secondary" type="submit" value="Update cart">
+      </div>
+    </div>
+    <div class="col-sm-3 offset-sm-1">
+
+      {% render 'cart-summary' %}
+
+    </div>
+  </div>
+</div>
+</form>

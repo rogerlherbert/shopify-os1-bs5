@@ -33,6 +33,7 @@
 
   --bs-primary: var(--xx-blue);
   --bs-font-sans-serif: Value, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --xx-font-bold: "Value Bold", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .display-1,
@@ -41,7 +42,7 @@
 .display-4,
 .display-5,
 .display-6 {
-  font-family: "Value Bold";
+  font-family: var(--xx-font-bold);
 }
 
 .btn {
@@ -125,3 +126,21 @@
 .xx-colour-nav__swatch--lilac::before { background-color: var(--xx-lilac); }
 .xx-colour-nav__swatch--neon-orange::before { background-color: var(--xx-neon-orange); }
 .xx-colour-nav__swatch--orange-camouflage::before { background-color: var(--xx-light-olive); border-color: var(--xx-neon-orange); }
+
+.xx-cart-item {}
+
+.xx-cart-item__image {}
+
+.xx-cart-item__remove-btn {
+  color: var(--bs-secondary);
+}
+
+.xx-cart-item__product-title {
+  color: var(--xx-black);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.xx-cart-item__variant-title {
+  color: var(--bs-secondary);
+}
