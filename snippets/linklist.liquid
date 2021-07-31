@@ -1,0 +1,14 @@
+{% liquid
+  case format
+  when 'inline'
+    render 'linklist-inline', list: list, levels: levels
+  when 'flush'
+    render 'linklist-flush', list: list, levels: levels
+  when 'navlink'
+    render 'linklist-navlink', list: list, levels: levels
+  when 'colour'
+    render 'linklist-colour-swatches', list: list, levels: levels
+  else
+    render 'linklist-nested', list: list, levels: levels
+  endcase
+%}

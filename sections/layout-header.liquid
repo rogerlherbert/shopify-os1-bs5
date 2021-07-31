@@ -1,15 +1,64 @@
 <div class="container">
-  <div class="row g-0 align-items-center">
-    <div class="col-8 col-md-10 text-center" style="height: 60px;">
+  <nav class="nav justify-content-between">
+    <div class="col-2 col-sm-5 d-flex align-items-center">
+
+      <a class="d-sm-none px-2 fs-5" href="#nav-drawer" data-bs-toggle="offcanvas"><i class="bi bi-list"></i></a>
+
+      <div class="d-none d-sm-flex">
+      {% for link_lv1 in linklists.main-menu.links %}
+        {% unless link_lv1.links.size > 0 %}
+        <div class="nav-item">
+          <a class="nav-link" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
+        </div>
+        {% else %}
+        <div class="nav-item dropdown has-megamenu">
+          <a class="nav-link dropdown-toggle" href="{{ link_lv1.url }}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ link_lv1.title }}</a>
+          <div class="dropdown-menu megamenu py-3" aria-labelledby="navbarDropdownMenuLink">
+            <div class="container">
+              <div class="row">
+                <div class="col-3">
+                  <h5>
+                    <a href="{{ link_lv1.url }}">{{ link_lv1.title }} overview</a>
+                  </h5>
+
+                  <div class="list-group list-group-flush">
+                    {% for link_lv2 in link_lv1.links %}
+                      <a class="list-group-item" href="{{ link_lv2.url }}">{{ link_lv2.title }}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                {% assign links_to_collections = link_lv1.links | where: "type", "collection_link" %}
+
+                {% for link_lv2 in links_to_collections limit: 3 %}
+                <div class="col-3">
+                  <a href="{{ link_lv2.url }}"><img class="img-fluid" loading="lazy" src="{{ link_lv2.object.featured_image | img_url: '320x', scale: 2 }}">{{ link_lv2.title }}</a>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endunless %}
+      {% endfor %}
+      </div>
+
+    </div>
+
+    <div class="col-8 col-sm-2 d-flex justify-content-center align-items-center">
       <a href="{{ routes.root_url }}"><img id="logo" class="img-fluid" loading="eager" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" src="{{ section.settings.image | img_url: 'x60', scale: 2 }}" alt="logo" /></a>
     </div>
-    <div class="col order-first text-center fs-2">
-      <a href="#nav-drawer" data-bs-toggle="offcanvas"><i class="bi bi-list"></i></a>
+
+    <div class="col-2 col-sm-5 d-flex justify-content-end align-items-center">
+      <a class="d-none d-sm-inline-flex px-2 fs-5" href="{{ routes.account_url }}"><i class="bi bi-person"></i></a>
+      <a class="d-none d-sm-inline-flex px-2 fs-5" href="{{ routes.search_url }}"><i class="bi bi-search"></i></a>
+      {% unless template.name == 'cart' %}
+      <a class="px-2 fs-5" href="#cart-drawer" data-bs-toggle="offcanvas"><i class="bi bi-bag"></i></a>
+      {% else %}
+      <a class="px-2 fs-5" href="{{ routes.cart_url }}"><i class="bi bi-bag"></i></a>
+      {% endunless %}
     </div>
-    <div class="col text-center fs-2">
-      <a href="#cart-drawer" data-bs-toggle="offcanvas"><i class="bi bi-bag"></i></a>
-    </div>
-  </div>
+  </nav>
 </div>
 
 {% stylesheet %}
@@ -17,6 +66,11 @@
   width: auto;
   height: auto;
   max-height: 60px;
+}
+
+@media all and (min-width: 992px) {
+  .nav .has-megamenu { position:static!important; }
+  .nav .megamenu { left:0; right:0; width:100%; margin-top:0; border: none; }
 }
 {% endstylesheet %}
 

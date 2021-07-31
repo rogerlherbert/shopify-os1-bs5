@@ -33,12 +33,18 @@ function Cart() {
 
       Shopify.theme.cart.updateItem(key, { quantity }).then(state => {
         this.data = state;
+        console.log(state);
 
         let updatedItem = state.items.find(item => item.key === key);
+
+        // format as money
         itemPriceEl.textContent = this.formatMoney(updatedItem.final_line_price);
         itemPriceEl.classList.add('text-success');
-        // TODO format as money
-        // TODO update summary block
+
+        // update summary block
+        let cartSubtotalEl = document.querySelector('.cart__subtotal');
+        cartSubtotalEl.textContent = this.formatMoney(state.items_subtotal_price);
+        cartSubtotalEl.classList.add('text-success');
       });
     }
   };
@@ -99,4 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   cart.init();
 
+  let spinnerEl = document.createElement('span');
+  spinnerEl.setAttribute('class', 'spinner-border spinner-border-sm');
+  spinnerEl.setAttribute('role', 'status');
+  spinnerEl.setAttribute('aria-hidden', 'true');
+
+  let buttonArr = document.querySelectorAll('.btn:not(.dropdown-toggle, [data-bs-target])');
+
+  buttonArr.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.replaceChildren(spinnerEl);
+    });
+  });
 });

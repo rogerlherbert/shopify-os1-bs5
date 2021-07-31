@@ -89,6 +89,7 @@
           </div>
         </form>
 
+        {% unless product.has_only_default_variant %}
         <script src="{{ 'option_selection.js' | shopify_asset_url }}" defer></script>
         <script>
           let selectCallback = function(variant, selector) {
@@ -218,6 +219,7 @@
             addBootstrapClassesToForm();
           })
         </script>
+        {% endunless %}
 
         <div class="my-5">{{ product.description }}</div>
 

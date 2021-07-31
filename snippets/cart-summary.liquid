@@ -3,7 +3,7 @@
   <div class="cart__summary">
     <dl class="row">
       <dt class="col-6">Subtotal{% if cart.taxes_included %} incl. taxes{% endif %}</dt>
-      <dd class="col-6 text-end">{{ cart.total_price | money_without_trailing_zeros }}</dd>
+      <dd class="cart__subtotal col-6 text-end">{{ cart.total_price | money_without_trailing_zeros }}</dd>
 
       <dt class="col-6">Shipping</dt>
       <dd class="col-6 text-end">calculated at checkout</dd>
@@ -12,7 +12,7 @@
 
   <div class="cart__cta mb-3">
     <div class="d-grid gap-2">
-      <input type="submit" class="btn btn-primary btn-lg" name="checkout" value="Checkout">
+      <button type="submit" class="btn btn-primary btn-lg" name="checkout">Checkout</button>
     </div>
   </div>
 
