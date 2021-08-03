@@ -18,12 +18,12 @@
               <div class="row">
                 <div class="col-3">
                   <h5>
-                    <a href="{{ link_lv1.url }}">{{ link_lv1.title }} overview</a>
+                    <a class="xx-linklist-flush__header-link" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
                   </h5>
 
                   <div class="list-group list-group-flush">
                     {% for link_lv2 in link_lv1.links %}
-                      <a class="list-group-item" href="{{ link_lv2.url }}">{{ link_lv2.title }}</a>
+                      <a class="xx-linklist-flush__item-link list-group-item" href="{{ link_lv2.url }}">{{ link_lv2.title }}</a>
                     {% endfor %}
                   </div>
                 </div>
@@ -68,9 +68,10 @@
   max-height: 60px;
 }
 
-@media all and (min-width: 992px) {
+@media all and (min-width: 769px) {
   .nav .has-megamenu { position:static!important; }
-  .nav .megamenu { left:0; right:0; width:100%; margin-top:0; border: none; }
+  .nav .megamenu { left:0; right:0; width:100%; margin-top:0; border: none; box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.05); }
+  .nav .megamenu a { text-decoration: none; }
 }
 {% endstylesheet %}
 

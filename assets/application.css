@@ -144,3 +144,17 @@
 .xx-cart-item__variant-title {
   color: var(--bs-secondary);
 }
+
+.xx-linklist-flush {
+
+}
+
+.xx-linklist-flush__header-link {
+  color: var(--xx-black);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.xx-linklist-flush__item-link {
+  padding-left: 0;
+}

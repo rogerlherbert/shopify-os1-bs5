@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
-      <h2>Login</h2>
+      <h2 class="text-center my-5">Login</h2>
 
       {% form 'customer_login' %}
 
@@ -10,12 +10,12 @@
 
       <div class="mb-3">
         <label for="customer_email" class="form-label">Email Address</label>
-        <input type="email" class="form-control form-control-lg" name="customer[email]" />
+        <input type="email" class="form-control form-control-lg" name="customer[email]" required="required" />
       </div>
 
       <div class="mb-3">
         <label for="customer_password" class="form-label">Password</label>
-        <input type="password" class="form-control form-control-lg" name="customer[password]" />
+        <input type="password" class="form-control form-control-lg" name="customer[password]" required="required" />
       </div>
 
       <div class="d-grid gap-2">
@@ -42,7 +42,7 @@
 
               <div class="mb-3">
                 <label for="customer_email" class="form-label">Email Address</label>
-                <input type="email" class="form-control" name="email" />
+                <input type="email" class="form-control" name="email" required="required" />
               </div>
 
               <div class="mb-3">

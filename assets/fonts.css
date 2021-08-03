@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Value';
+  src:  url('value-regular.woff2') format('woff2'),
+        url('value-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Value Bold';
+  src:  url('value-bold.woff2') format('woff2'),
+        url('value-bold.woff') format('woff');
+}

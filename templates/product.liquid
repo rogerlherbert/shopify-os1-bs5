@@ -86,6 +86,9 @@
             {% if additional_checkout_buttons %}
               <div class="additional_checkout_buttons">{{ content_for_additional_checkout_buttons }}</div>
             {% endif %}
+            {% unless current_variant.available %}
+              <button class="btn btn-primary btn-lg klaviyo-bis-trigger">Notify Me When Available</button>
+            {% endunless %}
           </div>
         </form>
 
@@ -132,12 +135,16 @@
             let btn = document.querySelector("#AddToCart");
             btn.setAttribute("disabled","");
             btn.textContent = "Out Of Stock";
+            btn.classList.remove("btn-primary");
+            btn.classList.add("btn-outline-secondary");
           }
 
           function enableSubmitButton() {
             let btn = document.querySelector("#AddToCart");
             btn.removeAttribute("disabled","");
             btn.textContent = "Add To Cart";
+            btn.classList.remove("btn-outline-secondary");
+            btn.classList.add("btn-primary");
           }
 
           function scrollCarouselToVariantImage(position) {
@@ -279,3 +286,5 @@
 </div>
 
 {% render 'json-ld-product', product: product %}
+
+{% render 'product-klaviyo' %}

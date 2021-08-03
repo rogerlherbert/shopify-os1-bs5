@@ -7,18 +7,17 @@
 
   <div class="offcanvas-body">
     <form action="/search" method="get" role="search">
-      <div class="input-group mb-3">
+      <div class="input-group mb-5">
         <input class="form-control form-control-lg" type="search" name="q" value="{{ search.terms | escape }}" required="required">
         <input type="hidden" name="type" value="product">
         <button class="btn btn-primary" type="submit">Search</button>
       </div>
     </form>
 
-    <nav>
+    <div class="mx-3">
     {% render 'linklist-navlink', list: linklists.main-menu %}
     <hr>
     {% render 'linklist-navlink', list: linklists.secondary-menu %}
-    </nav>
-
+    </div>
   </div>
 </div>

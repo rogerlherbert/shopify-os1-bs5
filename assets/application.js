@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   spinnerEl.setAttribute('role', 'status');
   spinnerEl.setAttribute('aria-hidden', 'true');
 
-  let buttonArr = document.querySelectorAll('.btn:not(.dropdown-toggle, [data-bs-target])');
+  let buttonArr = document.querySelectorAll('.btn:not(.dropdown-toggle, [data-bs-target], .klaviyo-bis-trigger)');
 
   buttonArr.forEach(btn => {
     btn.addEventListener('click', () => {

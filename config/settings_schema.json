@@ -1,10 +1,82 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Themekit template theme",
+    "theme_name": "OS1BS5",
     "theme_version": "1.0.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://github.com/Shopify/themekit",
-    "theme_support_url": "https://github.com/Shopify/themekit/issues"
+    "theme_author": "Roger Herbert",
+    "theme_documentation_url": "https://github.com/rogerlherbert/shopify-os1-bs5",
+    "theme_support_url": "https://github.com/rogerlherbert/shopify-os1-bs5/issues"
+  },
+  {
+    "name": {
+      "en": "Cookiebot"
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "Cookiebot Settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "To support GDPR and CCPA consent management on each site, configure Cookiebot according to [these instructions](https:\/\/support.cookiebot.com\/hc\/articles\/360010932419) and add the IDs below"
+      },
+      {
+        "type": "text",
+        "id": "cookiebot_id",
+        "label": "Domain Group ID",
+        "info": "Found on the \"Your Scripts\" tab of the Cookiebot settings page",
+        "placeholder": "00414fcb-d482-4c64-821c-3527556fba68"
+      }
+    ]
+  },
+  {
+    "name": {
+      "en": "Klaviyo"
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "Klaviyo Settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "Additional Klaviyo integrated features"
+      },
+      {
+        "type": "checkbox",
+        "id": "klaviyo_product_view_tracking",
+        "label": "Track Product Views in Klaviyo",
+        "default": true,
+        "info": "Requires GDPR cookie consent to load"
+      },
+      {
+        "type": "checkbox",
+        "id": "klaviyo_show_back_in_stock",
+        "label": "Show back in stock button",
+        "default": true,
+        "info": "Allows users to sign up for email notificaitons when stock is available again"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_public_api_key",
+        "label": "Klaviyo Public API Key",
+        "info": "Required to log back in stock notification requests",
+        "placeholder": "AB1c2d"
+      },
+      {
+        "type": "checkbox",
+        "id": "klaviyo_show_list_subscription_optin",
+        "label": "Show list subscription checkbox",
+        "default": true,
+        "info": "Allows users to also subscribe to marketing emails at the same time"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_email_list_id",
+        "label": "Klaviyo Email List ID",
+        "info": "ID of the list new subscribers will join",
+        "placeholder": "AB1c2d"
+      }
+    ]
   }
 ]
