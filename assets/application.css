@@ -60,6 +60,11 @@
   font-size: 1rem;
 }
 
+#shopify-section-layout-header a,
+#shopify-section-layout-footer a {
+  color: var(--xx-black);
+}
+
 .xx-product-grid {
   border-color: transparent;
 }

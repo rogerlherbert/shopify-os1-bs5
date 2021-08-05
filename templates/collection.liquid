@@ -35,7 +35,7 @@
 
 <div class="d-sm-none">
   <div class="filters_trigger position-fixed start-0 w-100 text-center">
-    <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#colours-drawer"><i class="bi bi-palette"></i> Colours</button>
+    {% if collection.handle contains "phone" %}<button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#colours-drawer"><i class="bi bi-palette"></i> Colours</button>{% endif %}
     <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#filters-drawer"><i class="bi bi-filter"></i> Filters</button>
   </div>
 

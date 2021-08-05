@@ -1,7 +1,7 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cart-drawer" aria-labelledby="offcanvasLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasLabel">Cart</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <h5 class="offcanvas-title" id="offcanvasLabel">{{ 'layout.cart.drawer_header' | t }}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'layout.cart.close_button' | t }}"></button>
   </div>
   <div class="offcanvas-body">
 
@@ -12,7 +12,7 @@
         {% endfor %}
       </div>
       <div class="cart__updater my-3 text-center">
-        <input class="btn btn-secondary" type="submit" value="Update cart">
+        <input class="btn btn-secondary" type="submit" value="{{ 'layout.cart.update_button' | t }}">
       </div>
 
       {% render 'cart-summary' %}

@@ -31,7 +31,7 @@
     <div class="col-sm-5">
       <div class="mx-sm-5 position-sticky" style="top: 120px;">
 
-        <div class="xx-breadcrumbs text-center"><small><a class="xx-breadcrumbs__link" href="{{ routes.root_url }}">Home</a> / {% if collection %}<a class="xx-breadcrumbs__link" href="{{ collection.url }}">{{ collection.title }}</a> /{% endif %}</small></div>
+        <div class="xx-breadcrumbs text-center"><small><a class="xx-breadcrumbs__link" href="{{ routes.root_url }}">{{ 'layout.breadcrumbs.home_link' | t }}</a> / {% if collection %}<a class="xx-breadcrumbs__link" href="{{ collection.url }}">{{ collection.title }}</a> /{% endif %}</small></div>
 
         <h1 class="text-uppercase text-center">{{ product.title }}</h1>
 
@@ -48,11 +48,11 @@
           {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
           <small class="text-secondary"><br>
             {%- if cart.taxes_included -%}
-            Taxes included.&nbsp;
+            {{ 'products.main.taxes_included' | t }}&nbsp;
             {%- endif -%}
 
             {%- if shop.shipping_policy.body != blank -%}
-            Shipping calculated at checkout.
+              {{ 'products.main.calculated_at_checkout' | t }}
             {%- endif -%}
           </small>
           {%- endif -%}
@@ -69,7 +69,7 @@
                   </option>
                 {% else %}
                   <option disabled="disabled">
-                    {{ variant.title }} - sold out
+                    {{ variant.title }} - {{ 'products.main.variant_option_sold_out' | t }}
                   </option>
                 {% endif %}
               {% endfor %}
@@ -82,12 +82,12 @@
           {% endunless %}
 
           <div class="d-grid gap-2 mb-3">
-            <button type="submit" name="add" id="AddToCart" class="btn btn-primary btn-lg"{% unless current_variant.available %} disabled="disabled"{% endunless %}>{% if current_variant.available %}Add to cart{% else %}Out Of Stock{% endif %}</button>
+            <button type="submit" name="add" id="AddToCart" class="btn btn-primary btn-lg"{% unless current_variant.available %} disabled="disabled"{% endunless %}>{% if current_variant.available %}{{ 'products.main.add_to_cart_button' | t }}{% else %}{{ 'products.main.out_of_stock_button' | t }}{% endif %}</button>
             {% if additional_checkout_buttons %}
               <div class="additional_checkout_buttons">{{ content_for_additional_checkout_buttons }}</div>
             {% endif %}
             {% unless current_variant.available %}
-              <button class="btn btn-primary btn-lg klaviyo-bis-trigger">Notify Me When Available</button>
+              <button class="btn btn-primary btn-lg klaviyo-bis-trigger">{{ 'products.back_in_stock.register_button' | t }}</button>
             {% endunless %}
           </div>
         </form>
@@ -96,6 +96,7 @@
         <script src="{{ 'option_selection.js' | shopify_asset_url }}" defer></script>
         <script>
           let selectCallback = function(variant, selector) {
+
             // update availability, price and image when variant changes
             if (typeof variant !== "undefined" && variant !== null) {
 
@@ -134,7 +135,7 @@
           function disableSubmitButton() {
             let btn = document.querySelector("#AddToCart");
             btn.setAttribute("disabled","");
-            btn.textContent = "Out Of Stock";
+            btn.textContent = "{{ 'products.main.out_of_stock_button' | t }}";
             btn.classList.remove("btn-primary");
             btn.classList.add("btn-outline-secondary");
           }
@@ -142,7 +143,7 @@
           function enableSubmitButton() {
             let btn = document.querySelector("#AddToCart");
             btn.removeAttribute("disabled","");
-            btn.textContent = "Add To Cart";
+            btn.textContent = "{{ 'products.main.add_to_cart_button' | t }}";
             btn.classList.remove("btn-outline-secondary");
             btn.classList.add("btn-primary");
           }
@@ -215,15 +216,26 @@
             });
           }
 
+          function removeVariantsContainingString(string, productJson) {
+            let newVariants = productJson.variants.filter(variant => !variant.title.includes(string));
+            productJson.variants = newVariants;
+            return productJson;
+          }
+
           // wait for option_selection.js deferred loading
           document.addEventListener('DOMContentLoaded', function(event) {
+
+            // TODO edit this line at launch
+            let productJson = removeVariantsContainingString('iPhone 13', {{ product | json }});
+
             new Shopify.OptionSelectors('productSelect', {
-              product: {{ product | json }},
+              product: productJson,
               onVariantSelected: selectCallback,
               enableHistoryState: true
             });
 
             addBootstrapClassesToForm();
+
           })
         </script>
         {% endunless %}
@@ -234,55 +246,6 @@
     </div>
   </div>
 
-  {% assign feature_image = images['1200x900.png'] %}
-
-  <div class="row g-0">
-    <div class="col-sm-6">
-      <picture>
-        <source srcset="{{ feature_image | img_url: '800x600', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
-        <img class="img-fluid" loading="lazy" width="{{ feature_image.width }}" height="{{ feature_image.height }}" src="{{ feature_image | img_url: '400x300', scale: 2, crop: 'center' }}" alt="{{ feature_image.alt | escape }}">
-      </picture>
-    </div>
-    <div class="col-sm-6">
-      <div class="h-100 p-5 d-flex flex-column justify-content-center text-center">
-        <h3>This is a feature</h3>
-        <p>This is some text that talks about the feature with nice SEO-rich keywords included.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row g-0">
-    <div class="col-sm-6">
-      <picture>
-        <source srcset="{{ feature_image | img_url: '800x600', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
-        <img class="img-fluid" loading="lazy" width="{{ feature_image.width }}" height="{{ feature_image.height }}" src="{{ feature_image | img_url: '400x300', scale: 2, crop: 'center' }}" alt="{{ feature_image.alt | escape }}">
-      </picture>
-    </div>
-    <div class="col-sm-6 order-sm-first">
-      <div class="h-100 p-5 d-flex flex-column justify-content-center text-center">
-        <h3>This is a feature</h3>
-        <p>This is some text that talks about the feature with nice SEO-rich keywords included.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row g-0">
-    <div class="col-sm-6">
-      <picture>
-        <source srcset="{{ feature_image | img_url: '800x600', scale: 2, crop: 'center' }}" media="(min-width: 576px)">
-        <img class="img-fluid" loading="lazy" width="{{ feature_image.width }}" height="{{ feature_image.height }}" src="{{ feature_image | img_url: '400x300', scale: 2, crop: 'center' }}" alt="{{ feature_image.alt | escape }}">
-      </picture>
-    </div>
-    <div class="col-sm-6">
-      <div class="h-100 p-5 d-flex flex-column justify-content-center text-center">
-        <h3>This is a feature</h3>
-        <p>This is some text that talks about the feature with nice SEO-rich keywords included.</p>
-      </div>
-    </div>
-  </div>
-
-  <hr class="my-5 invisible">
-  {% section 'product-recommendations' %}
 </div>
 
 {% render 'json-ld-product', product: product %}

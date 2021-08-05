@@ -1,8 +1,8 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="nav-drawer" aria-labelledby="offcanvasLabel">
 
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasLabel">Shop</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <h5 class="offcanvas-title" id="offcanvasLabel">{{ 'layout.nav.drawer_header' | t }}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'layout.nav.close_button' | t }}"></button>
   </div>
 
   <div class="offcanvas-body">
@@ -10,7 +10,7 @@
       <div class="input-group mb-5">
         <input class="form-control form-control-lg" type="search" name="q" value="{{ search.terms | escape }}" required="required">
         <input type="hidden" name="type" value="product">
-        <button class="btn btn-primary" type="submit">Search</button>
+        <button class="btn btn-primary" type="submit">{{ 'layout.nav.search_button' | t }}</button>
       </div>
     </form>
 

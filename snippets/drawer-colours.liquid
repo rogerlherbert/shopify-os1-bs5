@@ -1,7 +1,7 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="colours-drawer" aria-labelledby="offcanvasLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasLabel">Browse By Colour</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <h5 class="offcanvas-title" id="offcanvasLabel">{{ 'layout.colour_filter.drawer_header' | t }}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'layout.colour_filter.close_button' | t }}"></button>
   </div>
   <div class="offcanvas-body">
     {% render 'linklist-colour-swatches', list: linklists.phone-colour-tags %}

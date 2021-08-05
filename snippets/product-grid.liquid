@@ -1,6 +1,6 @@
 {% unless products.size > 0 %}
   <div class="text-center my-5">
-    <p>Nothing found...</p>
+    <p>{{ 'products.grid.nothing_found' | t }}</p>
   </div>
 {% else %}
   {% liquid

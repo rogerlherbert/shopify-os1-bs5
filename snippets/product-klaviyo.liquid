@@ -38,7 +38,7 @@
     });
     klaviyo.enable("backinstock",{
     trigger: {
-      product_page_text: "Notify Me When Available",
+      product_page_text: "{{ 'products.back_in_stock.register_button' | t }}",
       product_page_class: "btn",
       product_page_text_align: "center",
       product_page_margin: "0px",
@@ -46,11 +46,11 @@
     },
     modal: {
      headline: "{product_name}",
-     body_content: "Register to receive a notification when this item comes back in stock.",
-     email_field_label: "Email",
-     button_label: "Notify me when available",
-     newsletter_subscribe_label: "Add me to your email list.",
-     subscription_success_label: "You're in! We'll let you know when it's back.",
+     body_content: "{{ 'products.back_in_stock.register_description' | t }}",
+     email_field_label: "{{ 'products.back_in_stock.email_field_label' | t }}",
+     button_label: "{{ 'products.back_in_stock.register_button' | t }}",
+     newsletter_subscribe_label: "{{ 'products.back_in_stock.subscribe_label' | t }}",
+     subscription_success_label: "{{ 'products.back_in_stock.register_success_description' | t }}",
      footer_content: '',
      additional_styles: "@import url('{{ 'fonts.css' | asset_url }}');",
      drop_background_color: "#000",

@@ -8,11 +8,11 @@
       {% for link_lv1 in linklists.main-menu.links %}
         {% unless link_lv1.links.size > 0 %}
         <div class="nav-item">
-          <a class="nav-link" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
+          <a class="nav-link text-uppercase" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
         </div>
         {% else %}
         <div class="nav-item dropdown has-megamenu">
-          <a class="nav-link dropdown-toggle" href="{{ link_lv1.url }}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ link_lv1.title }}</a>
+          <a class="nav-link text-uppercase dropdown-toggle" href="{{ link_lv1.url }}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ link_lv1.title }}</a>
           <div class="dropdown-menu megamenu py-3" aria-labelledby="navbarDropdownMenuLink">
             <div class="container">
               <div class="row">

@@ -1,12 +1,11 @@
-{% unless collection.filters == empty %}
 <form>
   <div class="row mb-3 align-items-center">
     {% if collection.metafields.xou.show_browse_by_colour == true %}
-    <div class="col-auto">Browse by: </div>
+    <div class="col-auto">{{ 'layout.colour_filter.nav_label' | t }}</div>
 
     <div class="col-auto">
       <div class="dropdown">
-        <button class="btn btn-outline-secondary dropdown-toggle" id="browse-by-colour" data-bs-toggle="dropdown" data-bs-auto-close="outside" type="button" aria-expanded="false">Colour</button>
+        <button class="btn btn-outline-secondary dropdown-toggle" id="browse-by-colour" data-bs-toggle="dropdown" data-bs-auto-close="outside" type="button" aria-expanded="false">{{ 'layout.colour_filter.nav_button' | t }}</button>
 
         <ul class="dropdown-menu" aria-labelledby="browse-by-colour">
           {% assign is_tagged_view = false %}
@@ -23,52 +22,51 @@
     {% endif %}
 
     {% unless is_tagged_view %}
-    <div class="col-auto">Filters: </div>
+    <div class="col-auto">{{ 'layout.product_filter.nav_label' | t }}</div>
 
-    {%- for filter in collection.filters -%}
-    {% if filter.values.size > 1 %}
-    <div class="col-auto gx-2">
-      <div class="dropdown">
-        <button class="btn {% if filter.active_values.size > 0 %}btn-secondary{% else %}btn-outline-secondary{% endif %} dropdown-toggle" id="filter-{{ filter.label | handleize }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" type="button" aria-expanded="false">{{ filter.label }}</button>
+    {% for filter in collection.filters %}
+      {% if filter.values.size > 1 %}
+      <div class="col-auto gx-2">
+        <div class="dropdown">
+          <button class="btn {% if filter.active_values.size > 0 %}btn-secondary{% else %}btn-outline-secondary{% endif %} dropdown-toggle" id="filter-{{ filter.label | handleize }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" type="button" aria-expanded="false">{{ filter.label }}</button>
 
-        <ul class="dropdown-menu" aria-labelledby="filter-{{ filter.label | handleize }}">
-          {%- for filter_value in filter.values -%}
-            <li>
-              <div class="dropdown-item{% if filter_value.count == 0 and filter_value.active == false %} disabled{% endif %}">
-                <div class="form-check">
-                  <input type="checkbox"
-                    class="form-check-input"
-                    name="{{ filter_value.param_name }}"
-                    value="{{ filter_value.value }}"
-                    id="Filter-nav-{{ filter.label }}-{{ forloop.index }}"
-                    {% if filter_value.active -%}checked{%- endif %}
-                    {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
-                  >
-                  <div class="d-flex justify-content-between">
-                    <label class="form-check-label" for="Filter-nav-{{ filter.label }}-{{ forloop.index }}">{{ filter_value.label }}</label>
-                    <span class="badge bg-light text-dark">{{ filter_value.count }}</span>
+          <ul class="dropdown-menu" aria-labelledby="filter-{{ filter.label | handleize }}">
+            {% for filter_value in filter.values %}
+              <li>
+                <div class="dropdown-item{% if filter_value.count == 0 and filter_value.active == false %} disabled{% endif %}">
+                  <div class="form-check">
+                    <input type="checkbox"
+                      class="form-check-input"
+                      name="{{ filter_value.param_name }}"
+                      value="{{ filter_value.value }}"
+                      id="Filter-nav-{{ filter.label }}-{{ forloop.index }}"
+                      {% if filter_value.active -%}checked{%- endif %}
+                      {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                    >
+                    <div class="d-flex justify-content-between">
+                      <label class="form-check-label" for="Filter-nav-{{ filter.label }}-{{ forloop.index }}">{{ filter_value.label }}</label>
+                      <span class="badge bg-light text-dark">{{ filter_value.count }}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
+              </li>
+            {% endfor %}
+          </ul>
 
+        </div>
       </div>
-    </div>
-    {% endif %}
+      {% endif %}
     {% endfor %}
 
     <div class="col-auto">
-      <button class="btn btn-primary" type="submit">Apply</button>
-      <a class="btn btn-link" href="{{ collection.url }}">Clear all</a>
+      <button class="btn btn-primary" type="submit">{{ 'layout.product_filter.apply_button' | t }}</button>
+      <a class="btn btn-link" href="{{ collection.url }}">{{ 'layout.product_filter.clear_button' | t }}</a>
     </div>
 
     {% else %}
     <div class="col-auto">
-      <a class="btn btn-link" href="{{ collections['phone-necklaces'].url }}">Clear all</a>
+      <a class="btn btn-link" href="{{ collections['phone-necklaces'].url }}">{{ 'layout.product_filter.clear_button' | t }}</a>
     </div>
   {% endunless %}
   </div>
 </form>
-{% endunless %}

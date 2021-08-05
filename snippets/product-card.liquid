@@ -1,13 +1,13 @@
 <div class="xx-product-grid card h-100">
   <img class="card-img-top h-auto xx-product-grid__image" loading="lazy" width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src | img_url: '480x480', scale: 2, crop: 'center' }}" alt="{{ image.alt | escape }}">
 
-  {% unless product.available %}<span class="badge bg-body text-secondary text-uppercase position-absolute py-2 rounded-0 top-0 end-0">sold out</span>{% endunless %}
+  {% unless product.available %}<span class="badge bg-body text-secondary text-uppercase position-absolute py-2 rounded-0 top-0 end-0">{{ 'products.card.sold_out' | t }}</span>{% endunless %}
 
   <div class="card-body px-1 d-flex justify-content-between">
     <h6 class="card-title xx-product-grid__title"><a class="stretched-link xx-product-grid__link" href="{{ product.url | within: collection }}">{{ product.title }}</a></h6>
     <p class="card-text text-end text-nowrap lh-sm ps-3 xx-product-grid__price">
       {% if product.price_varies %}
-        from {{ product.price_min | money_without_trailing_zeros }}
+        {{ 'products.card.price_from' | t }}{{ product.price_min | money_without_trailing_zeros }}
       {% else %}
         {{ product.price | money_without_trailing_zeros }}
       {% endif %}

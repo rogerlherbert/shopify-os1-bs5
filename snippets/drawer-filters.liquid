@@ -1,7 +1,7 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="filters-drawer" aria-labelledby="offcanvasLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasLabel">Filters</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <h5 class="offcanvas-title" id="offcanvasLabel">{{ 'layout.product_filter.drawer_header' | t }}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'layout.product_filter.close_button' | t }}"></button>
   </div>
   <div class="offcanvas-body">
     <form class="filter-form mx-3 pb-5">
@@ -36,8 +36,8 @@
 
       <div class="active-filters position-fixed bottom-0 start-0 end-0 px-3 pt-3" style="background-color: white; padding-bottom: calc(1rem + env(safe-area-inset-bottom));">
         <div class="d-flex">
-          <a class="active-filters__clear me-3 flex-fill btn btn-sm btn-outline-secondary" href="{{ collection.url }}">Clear all</a>
-          <button class="active-filters__apply flex-fill btn btn-sm btn-primary" type="submit">Apply</button>
+          <a class="active-filters__clear me-3 flex-fill btn btn-sm btn-outline-secondary" href="{{ collection.url }}">{{ 'layout.product_filter.clear_button' | t }}</a>
+          <button class="active-filters__apply flex-fill btn btn-sm btn-primary" type="submit">{{ 'layout.product_filter.apply_button' | t }}</button>
         </div>
       </div>
     </form>

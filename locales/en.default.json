@@ -4,5 +4,85 @@
       "title": "Not found",
       "subtext_html": "The page you were looking for does not exist"
     }
+  },
+  "layout": {
+    "footer": {
+      "email_placeholder": "Your email address"
+    },
+    "nav": {
+      "drawer_header": "Shop",
+      "close_button": "Close",
+      "search_button": "Search"
+    },
+    "colour_filter": {
+      "drawer_header": "Browse By Colour",
+      "close_button": "Close",
+      "nav_label": "Browse by: ",
+      "nav_button": "Colour"
+    },
+    "product_filter": {
+      "drawer_header": "Product Filters",
+      "close_button": "Close",
+      "clear_button": "Clear all",
+      "apply_button": "Apply",
+      "nav_label": "Filters: "
+    },
+    "cart": {
+      "drawer_header": "Cart",
+      "close_button": "Close",
+      "update_button": "Update Cart",
+      "summary_subtotal": "Subtotal",
+      "includes_taxes": "incl. taxes",
+      "summary_shipping": "Shipping",
+      "calculated_at_checkout": "calculated at checkout",
+      "checkout_button": "Checkout",
+      "empty_cart": "Your cart is empty. Check out these links to get started:"
+    },
+    "breadcrumbs": {
+      "home_link": "Home",
+      "account_link": "Account"
+    }
+  },
+  "products": {
+    "card": {
+      "sold_out": "Sold Out",
+      "price_from": "from "
+    },
+    "grid": {
+      "nothing_found": "Nothing found&hellip;"
+    },
+    "main": {
+      "taxes_included": "Taxes included.",
+      "calculated_at_checkout": "Shipping calculated at checkout.",
+      "variant_option_sold_out": "sold out",
+      "add_to_cart_button": "Add to cart",
+      "out_of_stock_button": "Out Of Stock"
+    },
+    "back_in_stock": {
+      "register_button": "Notify Me When Available",
+      "register_description": "Register to receive a notification when this item comes back in stock.",
+      "email_field_label": "Email",
+      "register_success_description": "You're in! We'll let you know when it's back.",
+      "subscribe_label": "Also add me to your email list."
+    },
+    "recommendations": {
+      "header": "You may also like"
+    }
+  },
+  "customer": {
+    "address": {
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "company": "Company",
+      "address1": "Address 1",
+      "address2": "Address 2",
+      "city": "City",
+      "country": "Country",
+      "province": "Province",
+      "zip": "Post Code",
+      "phone": "Phone Number",
+      "save_as_default": "Save as default address",
+      "create_button": "Create Address"
+    }
   }
 }

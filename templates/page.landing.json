@@ -2,7 +2,7 @@
   "name": "Landing Page",
   "sections": {
     "header": {
-      "type": "index-masthead-image"
+      "type": "masthead-image"
     }
   },
   "order": [

@@ -16,12 +16,16 @@
       <div class="col-sm mb-5">
         <h5>{{ section.settings.mailinglist_headline }}</h5>
         <p>{{ section.settings.mailinglist_description }}</p>
-        <form>
-          <div class="input-group mb-3">
-            <input class="form-control" type="email" name="email" placeholder="Your email address" required="required">
-            <button class="btn btn-primary" type="submit">{{ section.settings.mailinglist_cta }}</button>
-          </div>
-        </form>
+        {% if settings.klaviyo_footer_form %}
+          <a class="btn btn-outline-secondary" href="#signup">{{ section.settings.mailinglist_cta }}</a>
+        {% else %}
+          {% form 'customer' %}
+            <div class="input-group mb-3">
+              <input class="form-control" type="email" name="email" placeholder="{{ 'layout.footer.email_placeholder' | t }}" required="required">
+              <button class="btn btn-primary" type="submit">{{ section.settings.mailinglist_cta }}</button>
+            </div>
+          {% endform %}
+        {% endif %}
       </div>
 
       <div class="col-sm mb-5">
