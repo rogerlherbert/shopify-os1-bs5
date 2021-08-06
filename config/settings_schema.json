@@ -78,5 +78,47 @@
         "placeholder": "AB1c2d"
       }
     ]
+  },
+  {
+    "name": {
+      "en": "Colour Browser"
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "Colour Browser"
+      },
+      {
+        "type": "link_list",
+        "id": "colour_menu",
+        "label": "Colour menu",
+        "info": "Links to all-products view filtered by colour tags"
+      }
+    ]
+  },
+  {
+    "name": {
+      "en": "Google Optimize"
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "Optimize.js Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "optimize_load_script",
+        "label": "Load the async script",
+        "default": true,
+        "info": "Allows optimize to load and run tests on the site"
+      },
+      {
+        "type": "text",
+        "id": "optimize_container_id",
+        "label": "Optimize Container ID",
+        "info": "Required to run tests",
+        "placeholder": "OPT-ABCDEFG"
+      }
+    ]
   }
 ]

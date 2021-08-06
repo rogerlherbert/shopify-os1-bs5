@@ -5,6 +5,8 @@
   </div>
   <div class="offcanvas-body">
 
+    {% if cart.item_count > 0 %}
+
     <form action="{{ routes.cart_url }}" method="post">
       <div class="cart__items">
         {% for item in cart.items %}
@@ -15,8 +17,17 @@
         <input class="btn btn-secondary" type="submit" value="{{ 'layout.cart.update_button' | t }}">
       </div>
 
-      {% render 'cart-summary' %}
-
+      {% render 'cart-summary' links: section.settings.main_menu.links %}
     </form>
+
+    {% else %}
+      <p class="text-center">{{ 'layout.cart.empty_cart' | t }}</p>
+      <div class="mb-3 text-center">
+        {% for link_lv1 in linklists.main-menu.links %}
+        <a class="btn btn-outline-secondary" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
   </div>
 </div>

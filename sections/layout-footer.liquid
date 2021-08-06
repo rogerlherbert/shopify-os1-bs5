@@ -4,13 +4,13 @@
   <div class="container px-4 px-sm-3">
     <div class="row gx-5">
       <div class="col-sm-2 mb-5">
-        <h5>{{ linklists.company-menu.title }}</h5>
-        {% render 'linklist-flush', list: linklists.company-menu %}
+        <h5>{{ section.settings.company_menu.title }}</h5>
+        {% render 'linklist-flush', list: section.settings.company_menu %}
       </div>
 
       <div class="col-sm-2 mb-5">
-        <h5>{{ linklists.support-menu.title }}</h5>
-        {% render 'linklist-flush', list: linklists.support-menu %}
+        <h5>{{ section.settings.support_menu.title }}</h5>
+        {% render 'linklist-flush', list: section.settings.support_menu %}
       </div>
 
       <div class="col-sm mb-5">
@@ -31,13 +31,13 @@
       <div class="col-sm mb-5">
         <h5>{{ section.settings.social_headline }}</h5>
         <p>{{ section.settings.social_description }}</p>
-        {% render 'linklist-inline', list: linklists.social-menu %}
+        {% render 'linklist-inline', list: section.settings.social_menu %}
       </div>
 
       <div class="col-sm-2">
-        <h5>{{ linklists.store-menu.title }}</h5>
+        <h5>{{ section.settings.store_menu.title }}</h5>
         <div class="mb-3">
-        {% for link_lv1 in linklists.store-menu.links %}
+        {% for link_lv1 in section.settings.store_menu.links %}
         <a class="btn btn-outline-secondary flex-fill" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
         {% endfor %}
         </div>
@@ -56,21 +56,49 @@
 
   <p class="text-center px-4">
     &copy; {{ "now" | date: "%Y" }} {{ section.settings.copyright }}
-    {% for link_lv1 in linklists.footer.links %}
+    {% for link_lv1 in section.settings.legal_menu.links %}
     <a href="{{ link_lv1.url }}" class="text-nowrap">{{ link_lv1.title }}</a>{% unless forloop.last %}, {% else %}.{% endunless%}
     {% endfor %}
   </p>
 </footer>
+
+{% javascript %}
+var localizationFormSubmit = function(event) {
+  event.target.form.submit();
+}
+
+document.querySelectorAll('.shopify-localization-form select').forEach(function(element) {
+  element.addEventListener('change', localizationFormSubmit);
+});
+{% endjavascript %}
 
 {% schema %}
 {
   "name": "Footer",
   "settings": [
     {
-      "type": "text",
-      "id": "copyright",
-      "label": "Copyright notice",
-      "default": "Company name. All rights reserved."
+      "type": "header",
+      "content": "Corporate Info"
+    },
+    {
+      "type": "link_list",
+      "id": "company_menu",
+      "label": "Company menu",
+      "info": "Links to corporate and professional info"
+    },
+    {
+      "type": "header",
+      "content": "Customer Support"
+    },
+    {
+      "type": "link_list",
+      "id": "support_menu",
+      "label": "Support menu",
+      "info": "Links customer support and self-help options"
+    },
+    {
+      "type": "header",
+      "content": "Mailing List"
     },
     {
       "type": "text",
@@ -91,6 +119,10 @@
       "default": "Sign up"
     },
     {
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
       "type": "text",
       "id": "social_headline",
       "label": "Social Headline",
@@ -101,6 +133,39 @@
       "id": "social_description",
       "label": "Social Description",
       "default": "Keep in touch via social media for more offers and inspiration to #keepyourhandsfree"
+    },
+    {
+      "type": "link_list",
+      "id": "social_menu",
+      "label": "Social menu",
+      "info": "Links to company social media profiles"
+    },
+    {
+      "type": "header",
+      "content": "Localisation Controls"
+    },
+    {
+      "type": "link_list",
+      "id": "store_menu",
+      "label": "Store menu",
+      "info": "Links to other regional stores"
+    },
+    {
+      "type": "header",
+      "content": "Legal Info"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright notice",
+      "default": "Company name. All rights reserved."
+    },
+    {
+      "type": "link_list",
+      "id": "legal_menu",
+      "label": "Legal menu",
+      "info": "Links to terms, policies, imprint, etc.",
+      "default": "footer"
     }
   ]
 }

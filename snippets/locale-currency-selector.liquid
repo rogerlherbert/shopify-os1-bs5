@@ -2,9 +2,7 @@
 <div class="input-group mb-3">
   <select name="country_code" class="form-select" aria-label="Country select">
     {% for currency in shop.enabled_currencies %}
-      <option value="{{ country.iso_code }}"
-        {%- if currency.iso_code == cart.currency.iso_code %} selected="selected"{% endif %}
-      >
+      <option value="{{ country.iso_code }}"{%- if currency.iso_code == cart.currency.iso_code %} selected="selected"{% endif %}>
         {{ currency.iso_code }} - {{ currency.symbol }}
       </option>
     {% endfor %}

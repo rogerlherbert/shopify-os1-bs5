@@ -11,8 +11,10 @@ function Cart() {
         this.data = state;
       });
 
-    let cartUpdateButtonEl = document.querySelector('.cart__updater');
-    cartUpdateButtonEl.classList.add('d-none');
+    let cartUpdateButtonArr = document.querySelectorAll('.cart__updater');
+    cartUpdateButtonArr.forEach(el => {
+      el.classList.add('d-none');
+    })
 
     this.cartItemElements = document.querySelectorAll('.xx-cart-item');
 

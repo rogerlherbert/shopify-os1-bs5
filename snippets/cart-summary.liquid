@@ -1,34 +1,24 @@
-{% if cart.item_count > 0 %}
+<div class="cart__summary">
+  <dl class="row">
+    <dt class="col-6">{{ 'layout.cart.summary_subtotal' | t }}{% if cart.taxes_included %} {{ 'layout.cart.includes_taxes' | t }}{% endif %}</dt>
+    <dd class="cart__subtotal col-6 text-end">{{ cart.total_price | money_without_trailing_zeros }}</dd>
 
-  <div class="cart__summary">
-    <dl class="row">
-      <dt class="col-6">{{ 'layout.cart.summary_subtotal' | t }}{% if cart.taxes_included %} {{ 'layout.cart.includes_taxes' | t }}{% endif %}</dt>
-      <dd class="cart__subtotal col-6 text-end">{{ cart.total_price | money_without_trailing_zeros }}</dd>
+    <dt class="col-6">{{ 'layout.cart.summary_shipping' | t }}</dt>
+    <dd class="col-6 text-end">{{ 'layout.cart.calculated_at_checkout' | t }}</dd>
+  </dl>
+</div>
 
-      <dt class="col-6">{{ 'layout.cart.summary_shipping' | t }}</dt>
-      <dd class="col-6 text-end">{{ 'layout.cart.calculated_at_checkout' | t }}</dd>
-    </dl>
+<div class="cart__cta mb-3">
+  <div class="d-grid gap-2">
+    <button type="submit" class="btn btn-primary btn-lg" name="checkout">{{ 'layout.cart.checkout_button' | t }}</button>
   </div>
+</div>
 
-  <div class="cart__cta mb-3">
-    <div class="d-grid gap-2">
-      <button type="submit" class="btn btn-primary btn-lg" name="checkout">{{ 'layout.cart.checkout_button' | t }}</button>
-    </div>
-  </div>
+<div class="cart__paymenttypes text-center">
+  {% for type in shop.enabled_payment_types %}
+    {{ type | payment_type_svg_tag }}
+  {% endfor %}
+</div>
 
-  <div class="cart__paymenttypes text-center">
-    {% for type in shop.enabled_payment_types %}
-      {{ type | payment_type_svg_tag }}
-    {% endfor %}
-  </div>
-
-  <div class="cart__crossell">
-  </div>
-
-{% else %}
-
-<p>{{ 'layout.cart.empty_cart' | t }}</p>
-
-{% render 'linklist-navlink', list: linklists.main-menu, levels: 0 %}
-
-{% endif %}
+<div class="cart__crossell">
+</div>

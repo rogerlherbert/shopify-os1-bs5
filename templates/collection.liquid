@@ -35,8 +35,8 @@
 
 <div class="d-sm-none">
   <div class="filters_trigger position-fixed start-0 w-100 text-center">
-    {% if collection.handle contains "phone" %}<button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#colours-drawer"><i class="bi bi-palette"></i> Colours</button>{% endif %}
-    <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#filters-drawer"><i class="bi bi-filter"></i> Filters</button>
+    <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#colours-drawer"><i class="bi bi-palette"></i> {{ 'collection.colour_filter.nav_button' | t }}</button>
+    <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#filters-drawer"><i class="bi bi-filter"></i> {{ 'collection.product_filter.nav_button' | t }}</button>
   </div>
 
   <style>
@@ -46,6 +46,8 @@
   }
   </style>
 
-  {% render 'drawer-colours' %}
-  {% render 'drawer-filters' %}
 </div>
+
+{% render 'drawer-colours' %}
+
+{% render 'drawer-filters' %}

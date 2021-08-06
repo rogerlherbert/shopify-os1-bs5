@@ -1,23 +1,31 @@
-<h1 class="text-center my-5">Your Cart</h1>
+<h1 class="text-center my-5">{{ 'layout.cart.page_header' | t }}</h1>
 
-<form action="{{ routes.cart_url }}" method="post">
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4 offset-sm-2">
-      <div class="cart__items">
-        {% for item in cart.items %}
-          {% render 'cart-item' item: item %}
-        {% endfor %}
-      </div>
-      <div class="cart__updater my-3 text-center">
-        <input class="btn btn-secondary" type="submit" value="Update cart">
+{% if cart.item_count > 0 %}
+  <form class="mb-5" action="{{ routes.cart_url }}" method="post">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 offset-sm-2">
+          <div class="cart__items">
+            {% for item in cart.items %}
+              {% render 'cart-item' item: item %}
+            {% endfor %}
+          </div>
+          <div class="cart__updater my-3 text-center">
+            <input class="btn btn-secondary" type="submit" value="Update cart">
+          </div>
+        </div>
+
+        <div class="col-sm-3 offset-sm-1">
+          {% render 'cart-summary' %}
+        </div>
       </div>
     </div>
-    <div class="col-sm-3 offset-sm-1">
-
-      {% render 'cart-summary' %}
-
-    </div>
+  </form>
+{% else %}
+  <p class="text-center">{{ 'layout.cart.empty_cart' | t }}</p>
+  <div class="mb-3 text-center">
+    {% for link_lv1 in linklists.main-menu.links %}
+    <a class="btn btn-outline-secondary" href="{{ link_lv1.url }}">{{ link_lv1.title }}</a>
+    {% endfor %}
   </div>
-</div>
-</form>
+{% endif %}

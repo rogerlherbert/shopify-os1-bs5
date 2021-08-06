@@ -1,6 +1,5 @@
 <form>
   <div class="row mb-3 align-items-center">
-    {% if collection.metafields.xou.show_browse_by_colour == true %}
     <div class="col-auto">{{ 'layout.colour_filter.nav_label' | t }}</div>
 
     <div class="col-auto">
@@ -9,7 +8,7 @@
 
         <ul class="dropdown-menu" aria-labelledby="browse-by-colour">
           {% assign is_tagged_view = false %}
-          {% for colour_tag in linklists.phone-colour-tags.links %}
+          {% for colour_tag in settings.colour_menu.links %}
             <li>
               <a class="dropdown-item{% if colour_tag.active %}{% assign is_tagged_view = true %} active{% endif %}" href="{{ colour_tag.url }}">
                 {{ colour_tag.title }}
@@ -19,7 +18,6 @@
         </ul>
       </div>
     </div>
-    {% endif %}
 
     {% unless is_tagged_view %}
     <div class="col-auto">{{ 'layout.product_filter.nav_label' | t }}</div>

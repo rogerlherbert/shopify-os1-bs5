@@ -2,7 +2,7 @@
   <div class="row gx-0">
     <div class="col-3">
       <a href="{{ item.url | within: collections.all }}">
-        <img class="xx-cart-item__image img-fluid" loading="lazy" width="{{ item.image.width }}" height="{{ item.image.height }}" src="{{ item.image | img_url }}" alt="{{ item.title | escape }}">
+        <img class="xx-cart-item__image img-fluid" loading="lazy" width="{{ item.image.width }}" height="{{ item.image.height }}" src="{{ item.image | img_url: '100x', scale: 2 }}" alt="{{ item.title | escape }}">
       </a>
     </div>
     <div class="col ms-3">

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    {% if settings.optimize_load_script %}<script async src="https://www.googleoptimize.com/optimize.js?id={{ settings.optimize_container_id }}"></script>{% endif %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="{{ page_description | escape }}">
@@ -13,9 +14,8 @@
     <title>{{ page_title }}</title>
   </head>
   <body class="{{ template.name | default: handle }} position-relative" id="{{ handle | default: template.name }}">
-    <header class="position-sticky top-0" style="z-index: 1020; background-color: white;">
-      {% section 'layout-header' %}
-    </header>
+
+    {% section 'layout-header' %}
 
     <main role="main">
       {% section 'layout-announcement-bar' %}
@@ -23,10 +23,6 @@
     </main>
 
     {% section 'layout-footer' %}
-
-    {% render 'drawer-nav' %}
-
-    {% render 'drawer-cart' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
     <script src="{{ 'theme-cart.min.js' | asset_url }}" defer></script>
